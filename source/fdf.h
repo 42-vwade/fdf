@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 10:43:39 by viwade            #+#    #+#             */
-/*   Updated: 2019/03/28 17:56:04 by viwade           ###   ########.fr       */
+/*   Updated: 2019/03/29 04:25:00 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,22 @@ struct s_fdf
 	char	**
 	t_list	*input;
 };
+struct s_image
+{
+	u_int8_t	*data;
+	u_int32_t	width;
+	u_int32_t	height;
+};
 struct	s_vec3d
 {
-	int64_t	x;
-	int64_t	y;
-	int64_t	z;
+	double	x;
+	double	y;
+	double	z;
 };
 struct	s_vec2d
 {
-	int64_t	x;
-	int64_t	y;
+	double	x;
+	double	y;
 };
 struct	s_elem
 {
