@@ -2,8 +2,10 @@
 NAME		=	fdf
 SRCDIR		=	source
 FTLIBDIR	=	libft
+MLXLIBDIR	=	minilibx
 FDFLIB		=	libfdf.a
 FTLIB		=	$(FTLIBDIR)/libft.a
+MLXLIB		=	$(MLXLIBDIR)/libmlx.a
 
 SRC	= $(filter *.c, $(filter-out .*, $(notdir $(wildcard $(SRCDIR)/*))))
 SRC	= $(SRCDIR)/$(SRC)
@@ -28,13 +30,18 @@ $(OBJ): $(SRC)
 $(FTLIB):
 	@cd $(FTLIBDIR) && make
 
+$(MLXLIB):
+	@cd $(MLXLIBDIR) && make
+
 clean:
 	@rm -rf $(OBJ)
 	@cd $(FTLIBDIR) && make clean
+	@cd $(MLXLIBDIR) && make clean
 
 fclean: clean
-	@rm -rf $(NAME) $(FDFLIB) $(FTLIB)
+	@rm -rf $(NAME) $(FDFLIB)
 	@cd $(FTLIBDIR) && make fclean
+	@cd $(MLXLIBDIR) && make fclean
 
 re: fclean all
 

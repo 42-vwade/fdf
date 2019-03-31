@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:43:22 by viwade            #+#    #+#             */
-/*   Updated: 2019/03/28 17:56:58 by viwade           ###   ########.fr       */
+/*   Updated: 2019/03/30 00:57:28 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,21 @@
 
 t_v2d	g_size = {20, 20};
 
-int
-	verify(t_fdf o)
+t_fdf
+	verify(int fd)
 {
-	char	*line;
+	t_fdf	o;
 
-	while (get_next_line(o.fd, &line))
+	while (get_next_line(o.fd, &o.str))
 	{
-		ft_strsplit(line, ' ');
+		while (ft_iswhitespace(o.str[0]))
+			o.str++;
+		while (*o.str)
+		{
+			if (ft_isdigit(o.str[0]))
+				;
+		}
+		ft_strsplit(o.str, ' ');
 	}
 	return (0);
 }

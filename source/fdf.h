@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 10:43:39 by viwade            #+#    #+#             */
-/*   Updated: 2019/03/29 04:25:00 by viwade           ###   ########.fr       */
+/*   Updated: 2019/03/30 00:56:33 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_elem	t_elem;
 struct s_fdf
 {
 	int		fd;
-	char	**
+	char	*str;
 	t_list	*input;
 };
 struct s_image
