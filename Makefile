@@ -7,31 +7,28 @@ FDFLIB		=	libfdf.a
 FTLIB		=	$(FTLIBDIR)/libft.a
 MLXLIB		=	$(MLXLIBDIR)/libmlx.a
 
-SRC	= $(filter *.c, $(filter-out .*, $(notdir $(wildcard $(SRCDIR)/*))))
-SRC	= $(SRCDIR)/$(SRC)
+SRC	= $(addprefix $(SRCDIR)/, $(notdir $(filter %.c, $(filter-out .%, $(wildcard $(SRCDIR)/*)))))
 OBJ	= $(notdir $(SRC:%.c=%.o))
 
-CFLAGS	= -c -Wall -Werror -Wextra
+CFLAGS	= -Wall -Werror -Wextra
 
 all: $(NAME)
 
-$(NAME): $(FDFLIB) $(FTLIB)
-	#	DELETE THIS	>>	##
+$(NAME): $(FDFLIB) $(FTLIB) $(MLXLIB)
 	touch $@
-	#	DELETE THIS	<<	##
 
 $(FDFLIB): $(OBJ)
-	@ar rc $@ $^
+	@ar -rc $@ $^
 	@ranlib $@
 
 $(OBJ): $(SRC)
 	gcc $(CFLAGS) $^
 
-$(FTLIB):
-	@cd $(FTLIBDIR) && make
+$(FTLIB): $(FTLIBDIR)
+	@cd $^ && make
 
-$(MLXLIB):
-	@cd $(MLXLIBDIR) && make
+$(MLXLIB): $(MLXLIBDIR)
+	@cd $^ && make
 
 clean:
 	@rm -rf $(OBJ)
@@ -45,4 +42,9 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re test v
+
+v%: ;	@echo $* = $($*);
+
+test:
+	$(foreach var,$(.VARIABLES),$(info $(var) = $($(var))))

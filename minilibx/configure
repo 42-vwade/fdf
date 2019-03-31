@@ -1,5 +1,8 @@
 #!/bin/sh
 
+echo "
+	MINILIBX CONFIGURATION
+"
 
 if [ -n "$1" -a "$1" = "--help" ] ; then
 	echo "Usage : $0\n Auto-configure and make MinilibX"
@@ -81,14 +84,20 @@ cat Makefile.mk | grep -v %%%% >> Makefile.gen
 /bin/echo "DOCP=$conf_docp" >> test/Makefile.gen
 cat test/Makefile.mk | grep -v %%%% >> test/Makefile.gen
 
-
 if [ -n "$1" -a "$1" = "clean" ] ; then
-    echo "Now make it clean."
+	echo "
+	MINILIBX CLEANUP"
     make -f Makefile.gen clean
     (cd test ; make -f Makefile.gen clean)
     exit
 fi
 
+echo "
+	MLX MAKE
+"
 echo "Now make it."
 make -f Makefile.gen all
 (cd test ; make -f Makefile.gen all )
+
+echo "
+"
