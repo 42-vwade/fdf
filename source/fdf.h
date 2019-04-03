@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 10:43:39 by viwade            #+#    #+#             */
-/*   Updated: 2019/03/30 00:56:33 by viwade           ###   ########.fr       */
+/*   Updated: 2019/04/02 20:19:39 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@
 */
 
 typedef struct s_fdf	t_fdf;
+typedef struct s_mlx	t_mlx;
 typedef struct s_vec3d	t_v3d;
 typedef struct s_vec2d	t_v2d;
 typedef struct s_elem	t_elem;
-struct s_fdf
+struct	s_mlx
 {
-	int		fd;
-	char	*str;
-	t_list	*input;
+	void	*init;
+	void	*window;
 };
-struct s_image
+struct	s_image
 {
 	u_int8_t	*data;
 	u_int32_t	width;
@@ -53,13 +53,21 @@ struct	s_vec2d
 	double	x;
 	double	y;
 };
-struct	s_elem
+struct	s_pixel
 {
 	t_v2d		c;
 	int32_t		val;
 	u_int32_t	color;
 };
+struct	s_fdf
+{
+	int		fd;
+	t_mlx	mlx;
+	char	*str;
+	t_list	*input;
+};
 
+void	fdf(t_fdf obj);
 t_fdf	fdf_verify(int fd);
 
 #endif

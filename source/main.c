@@ -1,46 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/24 14:43:22 by viwade            #+#    #+#             */
-/*   Updated: 2019/04/02 20:21:47 by viwade           ###   ########.fr       */
+/*   Created: 2019/04/02 20:04:16 by viwade            #+#    #+#             */
+/*   Updated: 2019/04/02 20:25:57 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_v2d	g_size = {20, 20};
-
-static t_fdf
-	verify(int fd)
-{
-	t_fdf	o;
-
-	while (get_next_line(o.fd, &o.str))
-	{
-		while (ft_iswhitespace(o.str[0]))
-			o.str++;
-		while (*o.str)
-		{
-			if (ft_isdigit(o.str[0]))
-				;
-		}
-		ft_strsplit(o.str, ' ');
-	}
-	return (0);
-}
-
-void
-	fdf(t_fdf o)
+int
+	main(int n, char **v)
 {
 	t_mlx	mlx;
 
 	mlx.init = mlx_init();
-	mlx.window = mlx_new_window(mlx.w, 200, 200, "TEST WINDOW -- MLXy");
-	o.fd = fd;
-	verify(obj);
-	return ;
+	mlx.window = mlx_new_window(mlx.init, 200, 200, "MAIN::TEST WINDOW");
 }
+
+/*{
+	if (n == 2)
+		fdf(fdf_verify(open(v[1], O_RDONLY)));
+	else if (n == 4)
+	{
+		if (ft_atoi(v[2]) && ft_atoi(v[3]))
+			g_size = (t_v2d){ft_atoi(v[2]), ft_atoi(v[3])};
+		fdf(fdf_verify(open(v[1], O_RDONLY)));
+	}
+	else
+		ft_putendl("usage: ./fdf <filename> [ xy_size z_size]");
+}*/

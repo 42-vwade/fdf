@@ -22,7 +22,7 @@ $(FDFLIB): $(OBJ)
 	@ranlib $@
 
 $(OBJ): $(SRC)
-	gcc $(CFLAGS) $^
+	@gcc $(CFLAGS) $^
 
 $(FTLIB): $(FTLIBDIR)
 	@cd $^ && make
@@ -47,4 +47,5 @@ re: fclean all
 v%: ;	@echo $* = $($*);
 
 test:
-	$(foreach var,$(.VARIABLES),$(info $(var) = $($(var))))
+	$(foreach var,	$(.VARIABLES),\
+		$(info $(var) = $($(var))))
