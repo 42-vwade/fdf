@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 20:04:16 by viwade            #+#    #+#             */
-/*   Updated: 2019/04/02 20:25:57 by viwade           ###   ########.fr       */
+/*   Updated: 2019/04/05 14:54:19 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int
 {
 	t_mlx	mlx;
 
+	if (n == 2)
+		ft_putendl(v[1]);
 	mlx.init = mlx_init();
 	mlx.window = mlx_new_window(mlx.init, 200, 200, "MAIN::TEST WINDOW");
 }

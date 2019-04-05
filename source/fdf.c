@@ -6,12 +6,12 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:43:22 by viwade            #+#    #+#             */
-/*   Updated: 2019/04/02 20:21:47 by viwade           ###   ########.fr       */
+/*   Updated: 2019/04/05 14:52:57 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
+/*
 t_v2d	g_size = {20, 20};
 
 static t_fdf
@@ -32,6 +32,7 @@ static t_fdf
 	}
 	return (0);
 }
+*/
 
 void
 	fdf(t_fdf o)
@@ -39,8 +40,8 @@ void
 	t_mlx	mlx;
 
 	mlx.init = mlx_init();
-	mlx.window = mlx_new_window(mlx.w, 200, 200, "TEST WINDOW -- MLXy");
-	o.fd = fd;
-	verify(obj);
+	mlx.window = mlx_new_window(mlx.init, 200, 200, "TEST WINDOW -- MLXy");
+	o.fd = 1;
+	//verify(obj);
 	return ;
 }

@@ -10,12 +10,12 @@ MLXLIB		=	$(MLXLIBDIR)/libmlx.a
 SRC	= $(addprefix $(SRCDIR)/, $(notdir $(filter %.c, $(filter-out .%, $(wildcard $(SRCDIR)/*)))))
 OBJ	= $(notdir $(SRC:%.c=%.o))
 
-CFLAGS	= -Wall -Werror -Wextra
+CFLAGS	= -Wall -Werror -Wextra -lXext -lX11
 
 all: $(NAME)
 
 $(NAME): $(FDFLIB) $(FTLIB) $(MLXLIB)
-	touch $@
+	gcc -o $@ $(CFLAGS) -L $(FTLIBDIR) -lft -L $(MLXLIBDIR) -lmlx $(FDFLIB)
 
 $(FDFLIB): $(OBJ)
 	@ar -rc $@ $^
@@ -25,10 +25,10 @@ $(OBJ): $(SRC)
 	@gcc $(CFLAGS) $^
 
 $(FTLIB): $(FTLIBDIR)
-	@cd $^ && make
+	@make -C $^
 
 $(MLXLIB): $(MLXLIBDIR)
-	@cd $^ && make
+	@make -C $^
 
 clean:
 	@rm -rf $(OBJ)
