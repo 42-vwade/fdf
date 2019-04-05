@@ -10,25 +10,26 @@ MLXLIB		=	$(MLXLIBDIR)/libmlx.a
 SRC	= $(addprefix $(SRCDIR)/, $(notdir $(filter %.c, $(filter-out .%, $(wildcard $(SRCDIR)/*)))))
 OBJ	= $(notdir $(SRC:%.c=%.o))
 
-CFLAGS	= -Wall -Werror -Wextra -lXext -lX11
+CFLAGS	= -Wall -Werror -Wextra
+FF		= -framework OpenGL -framework AppKit
 
 all: $(NAME)
 
-$(NAME): $(FDFLIB) $(FTLIB) $(MLXLIB)
-	gcc -o $@ $(CFLAGS) -L $(FTLIBDIR) -lft -L $(MLXLIBDIR) -lmlx $(FDFLIB)
+$(NAME): $(FTLIB) $(MLXLIB) $(FDFLIB)
+	gcc -o $@ $(CFLAGS) $(FF) $^ -L $(FTLIBDIR) -L $(MLXLIBDIR) -lmlx -lft -v
 
 $(FDFLIB): $(OBJ)
 	@ar -rc $@ $^
 	@ranlib $@
 
 $(OBJ): $(SRC)
-	@gcc $(CFLAGS) $^
+	@make -C $(SRCDIR)
 
 $(FTLIB): $(FTLIBDIR)
-	@make -C $^
+	@cd $^ && make all
 
 $(MLXLIB): $(MLXLIBDIR)
-	@make -C $^
+	@cd $^ && make all
 
 clean:
 	@rm -rf $(OBJ)

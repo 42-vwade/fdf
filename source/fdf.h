@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 10:43:39 by viwade            #+#    #+#             */
-/*   Updated: 2019/04/05 14:21:14 by viwade           ###   ########.fr       */
+/*   Updated: 2019/04/05 15:11:44 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <math.h>
-# include "../minilibx/include/mlx.h"
+# include "../minilibx/mlx.h"
 # include "../libft/libft.h"
 
 /*
