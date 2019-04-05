@@ -6,22 +6,28 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 20:04:16 by viwade            #+#    #+#             */
-/*   Updated: 2019/04/05 15:26:51 by viwade           ###   ########.fr       */
+/*   Updated: 2019/04/05 16:33:41 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+
+
 int
 	main(int n, char **v)
 {
-	t_mlx	mlx;
+	t_fdf	o;
+	t_img	bmp;
 
 	if (n == 2)
 		ft_putendl(v[1]);
-	mlx.init = mlx_init();
-	mlx.window = mlx_new_window(mlx.init, 200, 200, "MAIN::TEST WINDOW");
-	mlx_loop(mlx.init);
+	o.mlx.init = mlx_init();
+	o.dim = (t_v2d){500, 500};
+	bmp.ref = mlx_new_image(o.mlx.init, o.dim.x, o.dim.y);
+	o.mlx.window = mlx_new_window(o.mlx.init, o.dim.x, o.dim.y, "BLANK");
+	mlx_put_image_to_window(o.mlx.init, o.mlx.window, bmp.ref, 0, 0);
+	mlx_loop(o.mlx.init);
 }
 
 /*{

@@ -14,6 +14,7 @@ CFLAGS	= -Wall -Werror -Wextra
 FF		= -framework OpenGL -framework AppKit
 
 all: $(NAME)
+	$^
 
 $(NAME): $(FTLIB) $(MLXLIB) $(FDFLIB)
 	gcc -o $@ $(CFLAGS) $(FF) $^ -L $(FTLIBDIR) -L $(MLXLIBDIR) -lmlx -lft -v
