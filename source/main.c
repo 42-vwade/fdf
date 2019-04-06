@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 20:04:16 by viwade            #+#    #+#             */
-/*   Updated: 2019/04/06 04:13:52 by viwade           ###   ########.fr       */
+/*   Updated: 2019/04/06 08:31:04 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,12 @@
 static	int
 	render(t_fdf *o)
 {
+	static int	i;
 
+	if (!(i % 1000))
+		print_memory(o, sizeof(*o));
 	mlx_put_image_to_window(o->mlx.init, o->mlx.window, o->bmp.ref, 0, 0);
-	return (0);
+	i = (i + 1) % 1000;
 }
 
 int
