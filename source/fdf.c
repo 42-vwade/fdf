@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:43:22 by viwade            #+#    #+#             */
-/*   Updated: 2019/04/05 14:52:57 by viwade           ###   ########.fr       */
+/*   Updated: 2019/04/06 00:34:12 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void
 	mlx.init = mlx_init();
 	mlx.window = mlx_new_window(mlx.init, 200, 200, "TEST WINDOW -- MLXy");
 	o.fd = 1;
+
 	//verify(obj);
 	return ;
 }

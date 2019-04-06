@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 10:43:39 by viwade            #+#    #+#             */
-/*   Updated: 2019/04/05 16:25:44 by viwade           ###   ########.fr       */
+/*   Updated: 2019/04/06 01:31:48 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,20 +57,25 @@ struct	s_image
 {
 	void		*ref;
 	t_pixel		*pixel;
-	u_int8_t	*data;
-	u_int32_t	width;
-	u_int32_t	height;
+	char		*start;
+	int			depth;
+	int			line;
+	int			endian;
+	uint32_t	width;
+	uint32_t	height;
 };
 struct	s_fdf
 {
 	int		fd;
 	t_mlx	mlx;
 	t_v2d	dim;
-	char	*str;
+	t_img	bmp;
 	t_list	*input;
+	void	*param;
 };
 
 void	fdf(t_fdf obj);
 t_fdf	fdf_verify(int fd);
 
 #endif
+

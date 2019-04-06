@@ -6,13 +6,19 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 20:04:16 by viwade            #+#    #+#             */
-/*   Updated: 2019/04/05 16:33:41 by viwade           ###   ########.fr       */
+/*   Updated: 2019/04/06 04:13:52 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+static	int
+	render(t_fdf *o)
+{
 
+	mlx_put_image_to_window(o->mlx.init, o->mlx.window, o->bmp.ref, 0, 0);
+	return (0);
+}
 
 int
 	main(int n, char **v)
@@ -25,8 +31,11 @@ int
 	o.mlx.init = mlx_init();
 	o.dim = (t_v2d){500, 500};
 	bmp.ref = mlx_new_image(o.mlx.init, o.dim.x, o.dim.y);
+	bmp.start = mlx_get_data_addr(bmp.ref, &bmp.depth, &bmp.line, &bmp.endian);
 	o.mlx.window = mlx_new_window(o.mlx.init, o.dim.x, o.dim.y, "BLANK");
-	mlx_put_image_to_window(o.mlx.init, o.mlx.window, bmp.ref, 0, 0);
+	o.bmp = bmp;
+	o.param = &o;
+	mlx_loop_hook(o.mlx.init, &render, o.param);
 	mlx_loop(o.mlx.init);
 }
 
