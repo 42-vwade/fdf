@@ -16,8 +16,11 @@ FF		= -framework OpenGL -framework AppKit
 all: $(NAME)
 	$^
 
+build: $(FTLIB) $(MLXLIB) $(FDFLIB)
+	@gcc -o $(NAME) $(FF) $^ -L $(FTLIBDIR) -L $(MLXLIBDIR) -lmlx -lft
+
 $(NAME): $(FTLIB) $(MLXLIB) $(FDFLIB)
-	gcc -o $@ $(CFLAGS) $(FF) $^ -L $(FTLIBDIR) -L $(MLXLIBDIR) -lmlx -lft -v
+	@gcc -o $@ $(CFLAGS) $(FF) $^ -L $(FTLIBDIR) -L $(MLXLIBDIR) -lmlx -lft
 
 $(FDFLIB): $(OBJ)
 	@ar -rc $@ $^
@@ -40,7 +43,7 @@ clean:
 fclean: clean
 	@rm -rf $(NAME) $(FDFLIB)
 	@cd $(FTLIBDIR) && make fclean
-	@cd $(MLXLIBDIR) && make fclean
+	@cd $(MLXLIBDIR) && make clean
 
 re: fclean all
 
