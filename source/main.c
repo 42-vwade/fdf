@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 20:04:16 by viwade            #+#    #+#             */
-/*   Updated: 2019/04/07 10:37:34 by viwade           ###   ########.fr       */
+/*   Updated: 2019/04/07 15:45:19 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@ static int
 	render(t_fdf *o)
 {
 	static int	i;
+	t_img	*bmp;
 
-	if (!(i % 10000))
-		print_memory(&(*o).bmp, sizeof((*o).bmp));
+	bmp = &o->bmp;
+	if (!(i % (1024 * 1024 / 100)))
+		print_memory(bmp, sizeof(*bmp));
 	mlx_put_image_to_window(o->mlx.init, o->mlx.window, o->bmp.ref, 0, 0);
-	i = (i + 1) % 10000;
+	i = (i + 1) % (1024 * 1024 / 100);
 	return (0);
 }
 
@@ -30,6 +32,13 @@ int
 {
 	t_fdf	o;
 	t_img	bmp;
+
+	print_hex((long)(char *){"abc"});
+	ft_putendl(ft_itoa_base((long)(char *){"abd"}, 16));
+
+	print_memory(&bmp, sizeof(bmp));
+
+	return 0;
 
 	if (n == 2 || n == 4)
 		ft_putendl(v[1]);
@@ -40,7 +49,7 @@ int
 	bmp.start = mlx_get_data_addr(bmp.ref, &bmp.depth, &bmp.line, &bmp.endian);
 	o.mlx.window = mlx_new_window(o.mlx.init, o.dim.x, o.dim.y, "BLANK");
 	o.bmp = bmp;
-	print_memory(&bmp, sizeof(bmp));
+
 	mlx_loop_hook(o.mlx.init, &render, &o);
 	mlx_loop(o.mlx.init);
 }
