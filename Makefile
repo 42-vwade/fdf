@@ -27,10 +27,10 @@ $(FDFLIB): $(OBJ)
 	@ranlib $@
 
 $(OBJ): $(SRC)
-	@make -C $(SRCDIR)
+	@make -C $(^D)
 
 $(FTLIB): $(FTLIBDIR)
-	@cd $^ && make all
+	@make re -C $(@D)
 
 $(MLXLIB): $(MLXLIBDIR)
 	@cd $^ && make all
