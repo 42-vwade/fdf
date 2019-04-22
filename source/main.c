@@ -6,21 +6,28 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 20:04:16 by viwade            #+#    #+#             */
-/*   Updated: 2019/04/22 06:39:47 by viwade           ###   ########.fr       */
+/*   Updated: 2019/04/22 07:45:42 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <stdio.h>
 
+/*
+**	Ok, here I am testing how to manipulate and display an image
+**	The hard part is not knowing exactly what data I am modifying
+**	Trial and error dictates we try until something works. Expect errors.
+**	Or worse.
+*/
+
 static int
 	render(t_fdf *o)
 {
 	static int	i;
 	int		avg = AVG_2D(o->dim);
-	t_img	*bmp;
+	char	*bmp;
 
-	bmp = &o->bmp;
+	bmp = &o->bmp.ref;
 	if (!(i % (avg)))
 		print_memory(bmp, sizeof(*bmp));
 	bmp[i] = i;
