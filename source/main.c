@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 20:04:16 by viwade            #+#    #+#             */
-/*   Updated: 2019/04/07 15:45:19 by viwade           ###   ########.fr       */
+/*   Updated: 2019/04/22 06:39:47 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,15 @@ static int
 	render(t_fdf *o)
 {
 	static int	i;
+	int		avg = AVG_2D(o->dim);
 	t_img	*bmp;
 
 	bmp = &o->bmp;
-	if (!(i % (1024 * 1024 / 100)))
+	if (!(i % (avg)))
 		print_memory(bmp, sizeof(*bmp));
+	bmp[i] = i;
 	mlx_put_image_to_window(o->mlx.init, o->mlx.window, o->bmp.ref, 0, 0);
-	i = (i + 1) % (1024 * 1024 / 100);
+	i = (i + 1) % (avg);
 	return (0);
 }
 

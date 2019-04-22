@@ -20,7 +20,7 @@ build: $(FTLIB) $(MLXLIB) $(FDFLIB)
 	@gcc -o $(NAME) $(FF) $^ -L $(FTLIBDIR) -L $(MLXLIBDIR) -lmlx -lft
 
 $(NAME): $(FTLIB) $(MLXLIB) $(FDFLIB)
-	@gcc -o $@ $(CFLAGS) $(FF) $^ -L $(FTLIBDIR) -L $(MLXLIBDIR) -lmlx -lft
+	@gcc -o $@ $(CFLAGS) $(FF) $^ -L $(dir $(FTLIB)) -L $(dir $(MLXLIB)) -lmlx -lft
 
 $(FDFLIB): $(OBJ)
 	@ar -rc $@ $^
