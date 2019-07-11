@@ -7,7 +7,7 @@ FDFLIB		=	libfdf.a
 FTLIB		=	$(FTLIBDIR)/libft.a
 MLXLIB		=	$(MLXLIBDIR)/libmlx.a
 
-SRC	= $(addprefix $(SRCDIR)/, $(notdir $(filter %.c, $(filter-out .%, $(wildcard $(SRCDIR)/*)))))
+SRC	= $(addprefix $(SRCDIR)/, $(notdir $(filter %.c, $(filter-out ._%, $(wildcard $(SRCDIR)/*)))))
 OBJ	= $(notdir $(SRC:%.c=%.o))
 
 CFLAGS	= -Wall -Werror -Wextra
@@ -27,7 +27,7 @@ $(FDFLIB): $(OBJ)
 	@ranlib $@
 
 $(OBJ): $(SRC)
-	@make -C $(^D)
+	@make -C $(<D)
 
 $(FTLIB): $(FTLIBDIR)
 	@make re -C $(@D)

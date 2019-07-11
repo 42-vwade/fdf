@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 10:43:39 by viwade            #+#    #+#             */
-/*   Updated: 2019/04/22 06:38:29 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/10 16:05:15 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@
 # include <time.h>
 # include <pthread.h>
 # include "fdf_structs.h"
+# include "fdf_macros.h"
 # include "../minilibx/mlx.h"
 # include "../libft/libft.h"
-# define	AVG_2D(c) ( ((c).x  + (c).y) / 2 )
+# define AVG_2D(c) ( ((c).x  + (c).y) / 2 )
 
 /*
 **	//	Allowed functions	//
