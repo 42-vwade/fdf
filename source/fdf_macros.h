@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 10:39:33 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/10 16:03:59 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/11 19:32:25 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define _TD_FDF	typedef struct s_fdf	fdf_t;
 # define _TD_MLX	typedef struct s_mlx	mlx_t;
 # define _TD_MAP	typedef struct s_map	map_t;
+# define _TD_MSH	typedef struct s_mesh	mesh_t;
 # define _TD_IMG	typedef struct s_image	img_t;
 # define _TD_PXL	typedef struct s_pixel	pixel_t;
 # define _TD_V3D	typedef struct s_vec3d	v3d_t;
@@ -39,6 +40,7 @@
 _TD_FDF;
 _TD_MLX;
 _TD_MAP;
+_TD_MSH;
 _TD_IMG;
 _TD_PXL;
 _TD_V3D;

@@ -6,43 +6,18 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:43:22 by viwade            #+#    #+#             */
-/*   Updated: 2019/04/06 00:34:12 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/12 15:19:41 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-/*
-t_v2d	g_size = {20, 20};
-
-static t_fdf
-	verify(int fd)
-{
-	t_fdf	o;
-
-	while (get_next_line(o.fd, &o.str))
-	{
-		while (ft_iswhitespace(o.str[0]))
-			o.str++;
-		while (*o.str)
-		{
-			if (ft_isdigit(o.str[0]))
-				;
-		}
-		ft_strsplit(o.str, ' ');
-	}
-	return (0);
-}
-*/
 
 void
-	fdf(t_fdf o)
+	fdf(char *filename)
 {
-	t_mlx	mlx;
+	fdf_t	o;
 
-	mlx.init = mlx_init();
-	mlx.window = mlx_new_window(mlx.init, 200, 200, "TEST WINDOW -- MLXy");
-	o.fd = 1;
-
-	//verify(obj);
-	return ;
+	o.map = fdf_init(filename);
+	o.m_init = mlx_init();
+	o.m_window = mlx_new_window(o.m_init, 200, 200, "TEST WINDOW -- MLXy");
 }

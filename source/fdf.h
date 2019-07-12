@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 10:43:39 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/10 16:05:15 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/11 23:52:30 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@
 **	perror, strerror
 */
 
-void	fdf(t_fdf obj);
-t_fdf	fdf_verify(int fd);
+void	fdf(char *filename);
+map_t	fdf_init(char *filename);
+void	fdf_read(map_t *map_object, int file_desc);
+void	fdf_line(map_t *map_object, size_t size, size_t i);
 
 #endif

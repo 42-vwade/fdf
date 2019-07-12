@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 10:37:13 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/10 23:56:32 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/12 00:00:12 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ static size_t
 
 	i = 0;
 	items = 0;
-	while (ft_iswhitespace(s[i]) && s[i])
+	while (s[i] && ft_iswhitespace(s[i]))
 		i++;
 	while (s[i])
 	{
 		items += 1;
-		while (!ft_iswhitespace(s[i]) && s[i])
+		while (s[i] && !ft_iswhitespace(s[i]))
 			i++;
-		while (ft_iswhitespace(s[i]) && s[i])
+		while (s[i] && ft_iswhitespace(s[i]))
 			i++;
 	}
 	return (items);
@@ -36,8 +36,8 @@ static size_t
 static t_point
 	item_point(char *s, v2d_t c)
 {
-	t_point	p;
-	int		col;
+	t_point			p;
+	union u_pixel	pxl;
 
 	if ((s[0] == '-' && !ft_isdigit(s[1])) ||
 		(s[0] != '-' && !ft_isdigit(s[0])))
@@ -49,17 +49,14 @@ static t_point
 	if (s[0] != ',' && !ft_iswhitespace(s[0]))
 		ft_error("fdf-error: invalid item color format");
 	else if (ft_iswhitespace(s[0]))
-		p.col = (t_pixel){.r = 255, .g = 255, .b = 255};
+		p.col = (pixel_t){.r = 255, .g = 255, .b = 255};
 	else if (s[0] == ',')
 	{
-		col = ft_hextol(&(++s)[0]);
-		p.col = (t_pixel){.r = col >> 16, .g = col >> 8, .b = col};
+		pxl.col = ft_hextol(&(++s)[0]);
+		p.col = (pixel_t){.r = pxl.rgb.r, .g = pxl.rgb.g, .b = pxl.rgb.b};
 	}
 	return (p);
 }
-
-static t_list
-
 
 static void
 	item_list(t_verify *v)
@@ -69,6 +66,8 @@ static void
 		v->cols = item_expect(v->line);
 	else if (v->cols != item_expect(v->line))
 		ft_error("fdf-error: input item count mismatch\n");
+	if (!v->cols)
+		ft_error("fdf-error: empty line");
 	while (v->line[0])
 		if (v->col > v->cols)
 			ft_error("fdf-error: too many items in row\n");
@@ -80,40 +79,53 @@ static void
 }
 
 static void
-	array_create(t_verify *v)
+	array_create(t_list *lst, t_point **arr)
 {
 	size_t	i;
+	t_point	*new;
 	t_list	*node;
 
 	i = 0;
-	node = v->lst;
-	while (i < v->len)
+	if (!(node = lst))
+		ft_error("fdf-error: [array_create] list is empty!");
+	while (node)
 	{
-		v->arr[i++] = *(t_point *)node->content;
-		if (node->next)
-			node = node->next;
-		else
-			break ;
+		*arr[i++] = *(t_point *)node->content;
+		node = node->next;
 	}
-	ft_lstdel(&v->lst, ft_del);
+	ft_lstdel(&lst, ft_del);
 }
 
-t_point
-	*fdf_read(int fd)
+/*
+**	Collect points, articulate position, detect color (if possible)
+**	Create
+**	Convert from list to array
+*/
+
+void
+	fdf_read(map_t *m, int fd)
 {
 	t_verify	v;
 
 	ft_bzero(&v, sizeof(v));
-	while (get_next_line(fd, &v.line) > 1)
+	if (!(get_next_line(fd, &v.line) > 0))
+		ft_error("fdf-error: nothing to read");
+	while ((1))
 	{
+		if (!v.line)
+			ft_error("fdf-error: nothing appended to line");
 		while (ft_iswhitespace(v.line[0]))
 			v.line++;
 		item_list(&v);
+		ft_memdel(&v.line);
 		v.row++;
+		if (!(get_next_line(fd, &v.line) > 0))
+			break ;
 	}
-	v.len = ft_lstlen(v.lst);
-	if (!(v.arr = (t_point *)malloc(v.len * sizeof(t_point))))
+	m->size = (v2d_t){v.cols, v.row};
+	m->mesh.v_len = ft_lstlen(v.lst);
+	if (!(m->mesh.v = (t_point *)malloc(sizeof(t_point) * (m->mesh.v_len))))
 		ft_error("fdf-error: could not allocate vertex array");
-	array_create(&v);
-	return (v.arr);
+	ft_bzero(m->mesh.v, sizeof(t_point) * (m->mesh.v_len));
+	array_create(v.lst, &m->mesh.v);
 }

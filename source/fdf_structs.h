@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:49:13 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/10 16:06:29 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/11 19:51:03 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,6 @@
 # include "../libft/libft.h"
 
 /*
-** ENUMERATION
-*/
-
-/*
-** UNION
-*/
-
-union	u_pixel
-{
-	char	r;
-	char	g;
-	char	b;
-};
-
-/*
 ** TYPE DEFINITIONS
 */
 
@@ -57,8 +42,14 @@ typedef struct s_point3d	t_point;
 typedef struct s_line2d	t_line2d;
 typedef struct s_line3d	t_line;
 typedef struct s_pixel	t_pixel;
+typedef union u_pixel	t_pixel;
 typedef struct s_image	t_img;
 typedef struct s_map	t_map;
+typedef struct s_verts	t_vert;
+
+/*
+** ENUMERATION
+*/
 
 /*
 ** STRUCT
@@ -104,15 +95,15 @@ struct	s_point3d
 
 struct	s_line2d
 {
-	p2d_t	a;
-	p2d_t	b;
+	p2d_t	*a;
+	p2d_t	*b;
 };
 
 struct	s_line3d
 {
-	p3d_t	a;
-	p3d_t	b;
-	double	len;
+	p3d_t	*a;
+	p3d_t	*b;
+	//double	len;
 };
 
 struct	s_image
@@ -127,11 +118,18 @@ struct	s_image
 	uint32_t	height;
 };
 
+struct	s_mesh
+{
+	p3d_t	*v;
+	l3d_t	*l;
+	size_t	v_len;
+	size_t	l_len;
+};
+
 struct	s_map
 {
-	t_point	point;
-	t_map	*right;
-	t_map	*down;
+	mesh_t	mesh;
+	v2d_t	size;
 };
 
 struct	s_verify
@@ -139,26 +137,38 @@ struct	s_verify
 	char	*line;
 	t_list	*lst;
 	size_t	len;
-	t_point	*arr;
+	p3d_t	*arr;
 	size_t	i;
 	size_t	col;
 	size_t	row;
 	size_t	cols;
 	p3d_t	point;
 	v2d_t	pos;
-	map_t	*map;
 };
 
 struct	s_fdf
 {
 	int		fd;
-	t_mlx	m;
+	map_t	map;
+	void	*m_init;
+	void	*m_window;
+	void	*m_image;
 	size_t	width;
 	size_t	height;
 	size_t	resolution;
 	t_img	bmp;
 	t_list	*input;
 	void	*param;
+};
+
+/*
+** UNION
+*/
+
+union	u_pixel
+{
+	unsigned int	col;
+	struct s_pixel	rgb;
 };
 
 #endif

@@ -1,25 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   keycodes_mac.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/12 15:14:03 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/12 15:14:50 by viwade           ###   ########.fr       */
+/*   Created: 2019/07/12 15:16:09 by viwade            #+#    #+#             */
+/*   Updated: 2019/07/12 15:16:47 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#ifndef KEYCODES_MAC_H
+# define KEYCODES_MAC_H
 
-int
-	main(int n, char **v)
-{
-	size_t	i;
-
-	i = 0;
-	if (n > 1)
-		while (++i < n)
-			fdf(v[i]);
-	return (0);
-}
+#endif
