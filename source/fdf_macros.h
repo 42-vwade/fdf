@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 10:39:33 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/11 19:32:25 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/12 18:12:19 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@
 */
 
 # define BIT_DEPTH 8
+# define LINE_RESOLUTION	8
+# define CONTROL_PANEL_X	240
+# define CONTROL_PANEL_Y	420
+# define VIEW_RES_MIN	(2 * CONTROL_PANEL_X)
+# define VIEW_RES_MAX	(3 * CONTROL_PANEL_X)
 
 /*
 **	TYPE DEFINITION
@@ -30,6 +35,7 @@
 # define _TD_MSH	typedef struct s_mesh	mesh_t;
 # define _TD_IMG	typedef struct s_image	img_t;
 # define _TD_PXL	typedef struct s_pixel	pixel_t;
+# define _UD_PXL	typedef union u_pixel	pixel_u;
 # define _TD_V3D	typedef struct s_vec3d	v3d_t;
 # define _TD_P3D	typedef struct s_point3d	p3d_t;
 # define _TD_L3D	typedef struct s_line3d	l3d_t;
@@ -43,6 +49,7 @@ _TD_MAP;
 _TD_MSH;
 _TD_IMG;
 _TD_PXL;
+_UD_PXL;
 _TD_V3D;
 _TD_P3D;
 _TD_L3D;

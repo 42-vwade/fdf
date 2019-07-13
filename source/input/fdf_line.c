@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 15:56:41 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/12 16:18:18 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/13 03:06:43 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,15 @@ static	p3d_t
 }
 
 static void
-	array_create(t_list *lst, t_line *arr)
+	array_create(t_list *lst, t_line *arr, size_t i)
 {
-	size_t	i;
 	t_list	*node;
 
-	i = 0;
 	node = lst;
 	while (node)
 	{
-		arr[i++] = *(t_line *)node->content;
+		ft_memcpy(arr, node->content, sizeof(t_line));
+		arr += sizeof(t_line);
 		node = node->next;
 	}
 	ft_lstdel(&lst, ft_del);
@@ -106,8 +105,8 @@ void
 		i++;
 	}
 	m->mesh.l_len = ft_lstlen(list);
-	if (!(m->mesh.l = (l3d_t*)malloc(sizeof(*m->mesh.l) * (m->mesh.l_len + 1))))
+	if (!(m->mesh.l = (l3d_t*)malloc(sizeof(*m->mesh.l) * (m->mesh.l_len))))
 		ft_error("fdf-error: could not allocate vertex lattice");
-	array_create(list, m->mesh.l);
+	array_create(list, m->mesh.l, 0);
 	vertex_normalize(m->mesh.v, m->mesh.v_len);
 }

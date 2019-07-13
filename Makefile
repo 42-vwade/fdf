@@ -1,48 +1,71 @@
 
 NAME		=	fdf
-SRCDIR		=	source
-FTLIBDIR	=	libft
+SRCDIR		=	source/
+OBJDIR		=	obj/
+LIBFTDIR	=	libft
 MLXLIBDIR	=	minilibx
 FDFLIB		=	libfdf.a
-FTLIB		=	$(FTLIBDIR)/libft.a
+LIBFT		=	$(LIBFTDIR)/libft.a
 MLXLIB		=	$(MLXLIBDIR)/libmlx.a
+CFILES		=	$(shell find ./source ! -name "._*" -regex ".*\\.[c]")
+LCFILES		=	$(shell find ./libft ! -name "._*" -regex ".*\\.[c]")
 
-SRC	= $(addprefix $(SRCDIR)/, $(notdir $(filter %.c, $(filter-out ._%, $(wildcard $(SRCDIR)/*)))))
+SRC	= $(addprefix $(SRCDIR), $(notdir $(filter %.c, $(filter-out ._%, $(wildcard $(SRCDIR)*)))))
 OBJ	= $(notdir $(SRC:%.c=%.o))
 
 CFLAGS	= -Wall -Werror -Wextra
 FF		= -framework OpenGL -framework AppKit
 
+####	AUTO SETTING	########################################################
+
+OBJDIR		:=	$(addprefix $(BUILDDIR), $(OBJDIR))
+LIB			:=	$(addprefix $(BUILDDIR), $(dir $(LIBFT)))
+OBJECTS		:=	$(addprefix $(OBJDIR), $(notdir $(CFILES:.c=.o)))
+
+####	UNDER THE HOOD	########################################################
+
 all: $(NAME)
 	$^
 
-build: $(FTLIB) $(MLXLIB) $(FDFLIB)
-	@gcc -o $(NAME) $(FF) $^ -L $(FTLIBDIR) -L $(MLXLIBDIR) -lmlx -lft
+test: $(LIBFT) $(MLXLIB) $(FDFLIB)
 
-$(NAME): $(FTLIB) $(MLXLIB) $(FDFLIB)
-	@gcc -o $@ $(CFLAGS) $(FF) $^ -L $(dir $(FTLIB)) -L $(dir $(MLXLIB)) -lmlx -lft
 
-$(FDFLIB): $(OBJ)
-	@ar -rc $@ $^
+build: $(CFILES) $(LCFILES) $(MLXLIB)
+	@gcc -g -o $(NAME) $(FF) $^ -L $(LIBFTDIR) -L $(MLXLIBDIR) -lmlx
+
+test:
+	./$(NAME)
+
+run:
+	./$(NAME)
+
+$(NAME): $(LIBFT) $(MLXLIB) $(FDFLIB)
+	@gcc -o $@ $(CFLAGS) $(FF) $^ -L $(dir $(LIBFT)) -L $(dir $(MLXLIB)) -lmlx -lft
+
+$(FDFLIB): $(OBJ) | $(OBJDIR)
+	@ar rcu $@ $(OBJDIR)/*.o
 	@ranlib $@
 
 $(OBJ): $(SRC)
 	@make -C $(<D)
 
-$(FTLIB): $(FTLIBDIR)
-	@make re -C $(@D)
-
 $(MLXLIB): $(MLXLIBDIR)
 	@cd $^ && make all
 
+$(LIBFT): $(LIBFTDIR) | $(OBJDIR)
+	@make all -C $(@D)
+
+$(OBJDIR):
+	@mkdir -p $@
+
 clean:
 	@rm -rf $(OBJ)
-	@cd $(FTLIBDIR) && make clean
+	@cd $(LIBFTDIR) && make clean
 	@cd $(MLXLIBDIR) && make clean
 
 fclean: clean
 	@rm -rf $(NAME) $(FDFLIB)
-	@cd $(FTLIBDIR) && make fclean
+	@cd $(LIBFTDIR) && make fclean
 	@cd $(MLXLIBDIR) && make clean
 
 re: fclean all

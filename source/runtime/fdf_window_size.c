@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_init.c                                         :+:      :+:    :+:   */
+/*   fdf_window_size.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/11 18:58:01 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/13 02:12:48 by viwade           ###   ########.fr       */
+/*   Created: 2019/07/12 16:42:48 by viwade            #+#    #+#             */
+/*   Updated: 2019/07/12 17:30:10 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-map_t	fdf_init(char *filename)
+v2d_t	fdf_window_size(v2d_t size)
 {
-	int		fd;
-	map_t	map;
+	size_t	v;
 
-	if ((fd = open(filename, O_RDONLY)) < 0)
-		ft_error("fdf-error: open file error");
-	ft_bzero(&map, sizeof(map));
-	fdf_read(&map, fd);
-	fdf_line(&map, map.mesh.v_len, 0);
-	close(fd);
-	return (map);
+	v = MAX(size.x, size.y) * LINE_RESOLUTION;
+	v = MIN(VIEW_RES_MAX, v);
+	size.x = MAX(CONTROL_PANEL_X + VIEW_RES_MIN, CONTROL_PANEL_X + v);
+	size.y = MAX(CONTROL_PANEL_Y + VIEW_RES_MIN, CONTROL_PANEL_Y + v);
+	return (size);
 }

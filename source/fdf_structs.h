@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:49:13 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/11 19:51:03 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/12 18:19:30 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ typedef struct s_point3d	t_point;
 typedef struct s_line2d	t_line2d;
 typedef struct s_line3d	t_line;
 typedef struct s_pixel	t_pixel;
-typedef union u_pixel	t_pixel;
 typedef struct s_image	t_img;
 typedef struct s_map	t_map;
 typedef struct s_verts	t_vert;
@@ -150,11 +149,13 @@ struct	s_fdf
 {
 	int		fd;
 	map_t	map;
+	char	*m_title;
 	void	*m_init;
 	void	*m_window;
 	void	*m_image;
 	size_t	width;
 	size_t	height;
+	v2d_t	dim;
 	size_t	resolution;
 	t_img	bmp;
 	t_list	*input;
