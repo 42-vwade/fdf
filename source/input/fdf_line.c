@@ -6,11 +6,12 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 15:56:41 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/13 03:06:43 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/14 14:50:29 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
+#define _D_D(a,b)	((double)(a)/(double)(b))
 
 static	p3d_t
 	*v_h(p3d_t *v, v3d_t c, size_t size)
@@ -58,25 +59,31 @@ static void
 }
 
 static void
-	vertex_normalize(p3d_t *v, size_t size)
+	vertex_normalize(map_t m, p3d_t *v, size_t size)
 {
 	size_t	i;
 	v3d_t	d;
 
 	i = 0;
 	d = (v3d_t){0, 0, 0};
+	print_double(m.size.x, 10); ft_putendl("]- dimensions mesh.x");
+	print_double(m.size.y, 10); ft_putendl("]- dimensions mesh.y");
 	while (i++ < size)
-		d = (v3d_t){.x = MAX(MAX(d.x, ABS(v[i - 1].pos.x)), ABS(v[i - 1].pos.y))
-		, .z = MAX(d.z, ABS(v[i - 1].pos.z))};
+		d.z = MAX(d.z, ABS(v[i - 1].pos.z));
 	i = 0;
-	d.x /= 2;
+	d = (v3d_t){(double)(m.size.x - 1) / 2, (double)(m.size.y - 1) / 2, d.z};
+	print_double(d.x, 10); ft_putendl("]- max normalize d.x");
+	print_double(d.y, 10); ft_putendl("]- aspect ratio d.y");
 	while (i++ < size)
-		v[i - 1].pos = (v3d_t){v[i - 1].pos.x / d.x, v[i - 1].pos.y / d.x,
-			v[i - 1].pos.z / d.z};
+		v[i - 1].pos = (v3d_t){
+			v[i - 1].pos.x - d.x, v[i - 1].pos.y - d.y, v[i - 1].pos.z};
 	i = 0;
+	d = (v3d_t){(double)MAX(m.size.x - 1, m.size.y - 1) / 2.0,
+		_D_D(m.size.y, m.size.x), d.z};
+	print_double(d.x, 10); ft_putendl("]- shift d.x");
 	while (i++ < size)
-		v[i - 1].pos =
-			(v3d_t){ v[i - 1].pos.x - 1, v[i - 1].pos.y - 1, v[i - 1].pos.z};
+		v[i - 1].pos = (v3d_t){
+			v[i - 1].pos.x / d.x, v[i - 1].pos.y / d.x, v[i - 1].pos.z / d.z};
 }
 
 /*
@@ -108,5 +115,5 @@ void
 	if (!(m->mesh.l = (l3d_t*)malloc(sizeof(*m->mesh.l) * (m->mesh.l_len))))
 		ft_error("fdf-error: could not allocate vertex lattice");
 	array_create(list, m->mesh.l, 0);
-	vertex_normalize(m->mesh.v, m->mesh.v_len);
+	vertex_normalize(*m, m->mesh.v, m->mesh.v_len);
 }

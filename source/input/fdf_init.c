@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 18:58:01 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/13 02:12:48 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/13 04:54:19 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ map_t	fdf_init(char *filename)
 	fdf_read(&map, fd);
 	fdf_line(&map, map.mesh.v_len, 0);
 	close(fd);
+	fdf_print_vertex(map.mesh);
 	return (map);
 }

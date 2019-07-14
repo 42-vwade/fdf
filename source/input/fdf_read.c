@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 10:37:13 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/13 03:01:12 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/13 04:08:08 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,12 @@ static t_point
 		ft_error("fdf-error: invalid item color format");
 	else if (s[0][0] && ft_iswhitespace(s[0][0]))
 		p.col = (pixel_t){.r = 255, .g = 255, .b = 255};
-	else if (s[0][0] == ',')
+	else if (s[0][0] && s[0][0] == ',' && s[0][1])
 	{
-		pxl.col = ft_hextol(&((++s)[0])[0]);
+		pxl.col = ft_hextol(&s[0][1]);
 		p.col = (pixel_t){.r = pxl.rgb.r, .g = pxl.rgb.g, .b = pxl.rgb.b};
+		while (s[0][0] && !ft_iswhitespace(s[0][0]))
+			s[0]++;
 	}
 	while (s[0][0] && ft_iswhitespace(s[0][0]))
 		s[0]++;
