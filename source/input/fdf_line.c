@@ -6,7 +6,11 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 15:56:41 by viwade            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/07/14 15:04:55 by viwade           ###   ########.fr       */
+=======
+/*   Updated: 2019/07/14 14:50:29 by viwade           ###   ########.fr       */
+>>>>>>> 9b0b01f62d18b835b9acaa0d691d4dc890214a31
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +70,27 @@ static void
 
 	i = 0;
 	d = (v3d_t){0, 0, 0};
+	print_double(m.size.x, 10); ft_putendl("]- dimensions mesh.x");
+	print_double(m.size.y, 10); ft_putendl("]- dimensions mesh.y");
 	while (i++ < size)
 		d.z = MAX(d.z, ABS(v[i - 1].pos.z));
 	i = 0;
 	d = (v3d_t){(double)(m.size.x - 1) / 2, (double)(m.size.y - 1) / 2, d.z};
+<<<<<<< HEAD
+=======
+	print_double(d.x, 10); ft_putendl("]- max normalize d.x");
+	print_double(d.y, 10); ft_putendl("]- aspect ratio d.y");
+>>>>>>> 9b0b01f62d18b835b9acaa0d691d4dc890214a31
 	while (i++ < size)
 		v[i - 1].pos = (v3d_t){
 			v[i - 1].pos.x - d.x, v[i - 1].pos.y - d.y, v[i - 1].pos.z};
 	i = 0;
 	d = (v3d_t){(double)MAX(m.size.x - 1, m.size.y - 1) / 2.0,
 		_D_D(m.size.y, m.size.x), d.z};
+<<<<<<< HEAD
+=======
+	print_double(d.x, 10); ft_putendl("]- shift d.x");
+>>>>>>> 9b0b01f62d18b835b9acaa0d691d4dc890214a31
 	while (i++ < size)
 		v[i - 1].pos = (v3d_t){
 			v[i - 1].pos.x / d.x, v[i - 1].pos.y / d.x, v[i - 1].pos.z / d.z};
