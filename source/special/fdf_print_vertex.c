@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 04:40:35 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/13 05:05:46 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/14 15:02:03 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ void	fdf_print_vertex(mesh_t m)
 	{
 		ft_putstr("v[");
 		ft_putnbr(i);
-		ft_putstr("]\tcolor[ #");
+		ft_putstr("]\t\tcolor[ #");
 		tmp = ft_itoa_base((ull_t)((*(uint *)&m.v[i].col) << 8) >> 8, 16);
 		ft_putstr(tmp);
 		free(tmp);
-		ft_putstr(" ]\tpos[ ");
+		ft_putstr(" ]    pos[ ");
 		print_double(m.v[i].pos.x, 6);
 		ft_putstr(" , ");
 		print_double(m.v[i].pos.y, 6);
