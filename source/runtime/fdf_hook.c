@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 19:32:33 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/14 18:33:02 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/14 18:34:15 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int
 static int
 	mouse_up(int button, int x, int y, fdf_t *o)
 {
-
+	o->redraw = 1;
 	return (!(o->mouse = 0));
 }
 
