@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 10:43:39 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/14 17:02:37 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/14 17:37:03 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ void	fdf_print_vertex(mesh_t map_object);
 void	fdf_print_line(mesh_t map_object);
 v2d_t	fdf_window_size(v2d_t map_size);
 void	fdf_hook(fdf_t *o);
+void	*fdf_mouse(size_t i);
 
 #endif
