@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:49:13 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/14 17:22:48 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/14 17:56:01 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,15 @@ struct	s_map
 	v2d_t	size;
 };
 
+struct	s_map2d
+{
+	p2d_t	*v;
+	l2d_t	*l;
+	size_t	v_len;
+	size_t	l_len;
+	v2d_t	size;
+};
+
 struct	s_verify
 {
 	char	*line;
@@ -150,17 +159,21 @@ struct	s_fdf
 	int		fd;
 	map_t	map;
 	map_t	map_transform;
-	char	iso;
+	map2d_t	map_draw;
 	char	*m_title;
 	void	*m_init;
 	void	*m_window;
 	void	*m_image;
+	char	iso;
+	char	key;
+	char	mouse;
 	size_t	width;
 	size_t	height;
 	v2d_t	dim;
 	size_t	resolution;
 	t_img	bmp;
 	t_list	*input;
+	char	redraw;
 	void	*param;
 };
 

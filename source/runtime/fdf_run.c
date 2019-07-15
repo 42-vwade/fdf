@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_mouse.c                                        :+:      :+:    :+:   */
+/*   fdf_run.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/14 17:33:10 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/14 17:58:39 by viwade           ###   ########.fr       */
+/*   Created: 2019/07/14 18:28:21 by viwade            #+#    #+#             */
+/*   Updated: 2019/07/14 18:31:39 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-static int
-	mouse_move(int x, int y, fdf_t *o)
+int
+	fdf_run_loop(fdf_t *o)
 {
-	if (o->mouse)
-		;
+	if (o->redraw)
+	{
+		o->redraw = 0;
+	}
 	return (1);
-}
-
-void
-	*fdf_mouse(size_t i)
-{
-	if (i == 1)
-		return (mouse_move);
-	return (0);
 }
