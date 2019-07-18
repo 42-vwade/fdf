@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 10:37:13 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/13 04:08:08 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/15 00:44:55 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,20 +113,16 @@ void
 	char		*tmp;
 
 	ft_bzero(&v, sizeof(v));
-	if (!(get_next_line(fd, &v.line) > 0))
-		ft_error("fdf-error: nothing to read");
-	while ((1))
+	while (!(get_next_line(fd, &v.line) > 0))
 	{
 		tmp = v.line;
-		if (!v.line)
+		if (!v.line[0])
 			ft_error("fdf-error: nothing appended to line");
 		while (ft_iswhitespace(v.line[0]))
 			v.line++;
 		item_list(&v);
 		ft_memdel((void**)&tmp);
 		v.row++;
-		if (!(get_next_line(fd, &v.line) > 0))
-			break ;
 	}
 	m->size = (v2d_t){v.cols, v.row};
 	m->mesh.v_len = ft_lstlen(v.lst);
@@ -134,4 +130,5 @@ void
 		ft_error("fdf-error: could not allocate vertex array");
 	ft_bzero(m->mesh.v, sizeof(t_point) * (m->mesh.v_len));
 	array_create(v.lst, m->mesh.v);
+	m->transform.scale = (v3d_t){1, 1, 1};
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_hook.c                                         :+:      :+:    :+:   */
+/*   fdf_keyboard.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/12 19:32:33 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/17 16:42:16 by viwade           ###   ########.fr       */
+/*   Created: 2019/07/17 16:42:26 by viwade            #+#    #+#             */
+/*   Updated: 2019/07/17 16:52:35 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,21 @@ static int
 }
 
 static int
-	mouse_down(int button, int x, int y, fdf_t *o)
+	key_event(int keycode, fdf_t *o)
 {
-	return (o->mouse = 1);
-}
-
-static int
-	mouse_up(int button, int x, int y, fdf_t *o)
-{
-	o->redraw = 1;
-	return (!(o->mouse = 0));
+	if (o->key)
+		;
+	return (1);
 }
 
 void
-	fdf_hook(fdf_t *o)
+	*fdf_keyboard(size_t i)
 {
-	mlx_loop_hook(o->m_init, fdf_run_loop, o);
-	mlx_hook(o->m_window, 2, 0, key_press, o);
-	mlx_hook(o->m_window, 3, 0, key_release, o);
-	mlx_hook(o->m_window, 4, 0, mouse_down, o);
-	mlx_hook(o->m_window, 5, 0, mouse_up, o);
-	mlx_hook(o->m_window, 6, 0, (int (*)()){fdf_mouse(1)}, o);
+	if (i == 1)
+		return (key_press);
+	if (i == 2)
+		return (key_release);
+	if (i == 3)
+		return (key_event);
+	return (0);
 }

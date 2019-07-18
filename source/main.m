@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 20:04:16 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/12 00:03:17 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/17 18:43:19 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,18 @@
 **	The hard part is not knowing exactly what data I am modifying
 **	Trial and error dictates we try until something works. Expect errors.
 **	Or worse.
+*/
+
+/*
+**	static void
+**		map_tfcpy(t_map *dst, const map_t *src)
+**	{
+**		ft_memcpy(dst, src, sizeof(*dst));
+**		dst->mesh.v = malloc(sizeof(*src->mesh.v) * src->mesh.v_len);
+**		ft_memcpy(dst->mesh.v, src->mesh.v, sizeof(*src->mesh.v) * src->mesh.v_len);
+**		dst->mesh.l = malloc(sizeof(*src->mesh.l) * src->mesh.l_len);
+**		ft_memcpy(dst->mesh.l, src->mesh.l, sizeof(*src->mesh.l) * src->mesh.l_len);
+**	}
 */
 
 /*static int

@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 10:39:33 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/12 18:12:19 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/17 18:41:03 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 # define _TD_V2D	typedef struct s_vec2d	v2d_t;
 # define _TD_P2D	typedef struct s_point2d	p2d_t;
 # define _TD_L2D	typedef struct s_line2d	l2d_t;
+# define _TD_TFM	typedef struct s_transform  tfm_t;
 
 _TD_FDF;
 _TD_MLX;
@@ -56,5 +57,6 @@ _TD_L3D;
 _TD_V2D;
 _TD_P2D;
 _TD_L2D;
+_TD_TFM;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 10:43:39 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/14 18:29:49 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/17 17:22:18 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ void	fdf_print_line(mesh_t map_object);
 v2d_t	fdf_window_size(v2d_t map_size);
 void	fdf_hook(fdf_t *o);
 int		fdf_run_loop(fdf_t *o);
+void	*fdf_keyboard(size_t i);
 void	*fdf_mouse(size_t i);
+p2d_t	fdf_project_2d(map_t *m, tfm_t t, char iso, size_t i);
+void	fdf_draw(t_map2d *m);
 
 #endif

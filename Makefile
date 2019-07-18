@@ -1,6 +1,7 @@
 
 NAME		=	fdf
 SRCDIR		=	source/
+BUILDDIR	= 	build/
 OBJDIR		=	obj/
 LIBFTDIR	=	libft
 MLXLIBDIR	=	minilibx
@@ -21,6 +22,7 @@ FF		= -framework OpenGL -framework AppKit
 OBJDIR		:=	$(addprefix $(BUILDDIR), $(OBJDIR))
 LIB			:=	$(addprefix $(BUILDDIR), $(dir $(LIBFT)))
 OBJECTS		:=	$(addprefix $(OBJDIR), $(notdir $(CFILES:.c=.o)))
+FDFLIB		:=	$(addprefix $(BUILDDIR), $(FDFLIB))
 
 ####	UNDER THE HOOD	########################################################
 
@@ -42,12 +44,14 @@ run:
 $(NAME): $(LIBFT) $(MLXLIB) $(FDFLIB)
 	@gcc -o $@ $(CFLAGS) $(FF) $^ -L $(dir $(LIBFT)) -L $(dir $(MLXLIB)) -lmlx -lft
 
-$(FDFLIB): $(OBJ) | $(OBJDIR)
+$(FDFLIB): $(OBJECTS) | $(OBJDIR) $(BUILDDIR)
 	@ar rcu $@ $(OBJDIR)/*.o
 	@ranlib $@
+	@mv $@ $(BUILDDIR)
 
-$(OBJ): $(SRC)
-	@make -C $(<D)
+$(OBJECTS): $(CFILES) | $(OBJDIR)
+	@make -C $(SRCDIR)
+	@mv ./*.o $(OBJDIR)
 
 $(MLXLIB): $(MLXLIBDIR)
 	@cd $^ && make all
@@ -56,6 +60,9 @@ $(LIBFT): $(LIBFTDIR) | $(OBJDIR)
 	@make all -C $(@D)
 
 $(OBJDIR):
+	@mkdir -p $@
+
+$(BUILDDIR):
 	@mkdir -p $@
 
 clean:

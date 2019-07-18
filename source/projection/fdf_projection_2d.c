@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   fdf_projection_2d.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/24 14:43:22 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/17 18:42:45 by viwade           ###   ########.fr       */
+/*   Created: 2019/07/14 23:41:38 by viwade            #+#    #+#             */
+/*   Updated: 2019/07/17 17:21:52 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../fdf.h"
+#define F_ISO(p,t)	
+#define F_PERS(p,t)	
+#define F_PROJ_X(i,p,t)	(i?F_ISO(p,t):F_PER(p,t))
 
-void
-	fdf(char *filename)
+p2d_t
+	fdf_project_2d(map_t *m, tfm_t t, char iso, size_t i)
 {
-	fdf_t	o;
+	p3d_t	v;
+	p2d_t	p;
 
-	o.map = fdf_init(filename);
-	o.m_init = mlx_init();
-	o.m_title = encode_utf8(L"fdf — viwade");
-	o.dim = fdf_window_size(o.map.size);
-	o.m_window = mlx_new_window(o.m_init, o.dim.x, o.dim.y, o.m_title);
-	fdf_hook(&o);
-	mlx_loop(o.m_init);
+	if (i >= m->mesh.v_len)	
+		ft_error("fdf-error: fdf_projection index mismatch");
+	v = (p3d_t)*(m->mesh.v + i * sizeof(p3d_t));
+	{
+		p.color = v.col;
+		p.pos.x = F_PROJ(iso, v.pos)
+		m.mesh.v[i];
+		i++;
+	}
+	return (p);
 }
