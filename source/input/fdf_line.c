@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 15:56:41 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/19 08:18:50 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/19 09:23:13 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ static void
 	i = 0;
 	d = (v3d_t){MAX(d.z, (double)MAX(m.size.x - 1, m.size.y - 1)) / 2.0,
 		_D_D(m.size.y, m.size.x), d.z};
-	d.x = 1;
 	while (i++ < size)
 		v[i - 1].pos = (v3d_t){
 			v[i - 1].pos.x / d.x, v[i - 1].pos.y / d.x, v[i - 1].pos.z / d.x};

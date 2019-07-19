@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 23:41:38 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/19 08:26:53 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/19 09:37:48 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #define F_PERS(p,t)	
 #define F_PROJ_X(i,p,t,x)	{v3d_t a,b,c; x=(i?F_ISO(p,t):F_PER(p,t));}
 #define SCPS(n,res)	(SQ(n) * (res))
-#define VEC_SCL(v,m)	((v3d_t){v.x * (m),v.y * (m),v.z * (m)})
+#define VEC_SCL(v,m)	((v3d_t){v.x * m,v.y * m,v.z * m})
 #define SCL2D(v,m)		((v2d_t){(v).x*(m),(v).y*(m)})
 
 static void
@@ -50,8 +50,7 @@ static void
 	p[0] = (p3d_t){VEC_SCL(l->a->pos, res), (pixel_t)l->a->col};
 	p[1] = (p3d_t){VEC_SCL(l->b->pos, res), (pixel_t)l->b->col};
 	c = (v3d_t){0, (p[1].pos.y - p[0].pos.y) / (p[1].pos.x - p[0].pos.x), 0};
-	c.z = ft_sqrt(PYTH(p[1].pos.x - p[0].pos.x, p[1].pos.y - p[0].pos.y,
-		p[1].pos.z - p[0].pos.z));
+	c.z = sqrt(PYTH(p[1].pos.x - p[0].pos.x, p[1].pos.y - p[0].pos.y, 0));
 	while (c.x < c.z)
 	{
 		pos = (v2d_t){p[0].pos.x + (c.x * MIN(1, 1 / c.y)),
