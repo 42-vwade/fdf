@@ -6,28 +6,32 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 16:42:26 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/17 16:52:35 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/19 14:08:15 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-static int
-	key_press(int keycode, fdf_t *o)
+int
+	key_press(int key, fdf_t *o)
 {
-	IF_C(keycode == KEY_P, o->iso = o->iso ? 0 : 1);
+	IF_C(key == KEY_P, o->iso = o->iso ? 0 : 1);
 	return (o->key = 1);
 }
 
-static int
-	key_release(int keycode, fdf_t *o)
+int
+	key_release(int key, fdf_t *o)
 {
-	IF_C(keycode == KEY_ESC, exit(0));
+	IF_C(key == KEY_ESC, exit(0));
+	IF_C(o->redraw = key == KEY_W, o->map.transform.rotate.x -= 10);
+	IF_C(o->redraw = key == KEY_S, o->map.transform.rotate.x -= 10);
+	IF_C(o->redraw = key == KEY_A, o->map.transform.rotate.y -= 10);
+	IF_C(o->redraw = key == KEY_D, o->map.transform.rotate.y += 10);
 	return (!(o->key = 0));
 }
 
-static int
-	key_event(int keycode, fdf_t *o)
+int
+	key_event(int key, fdf_t *o)
 {
 	if (o->key)
 		;

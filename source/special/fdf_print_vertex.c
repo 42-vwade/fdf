@@ -6,35 +6,33 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 04:40:35 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/14 17:47:20 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/19 12:49:48 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 #define PRECISION	4
 
-static void
+static FT_STR
 	fdf_xyz(p3d_t point)
 {
 	char *tmp;
 
-	ft_putstr("#");
-	tmp = ft_itoa_base((ull_t)((*(uint *)&point.col) << 8) >> 8, 16);
-	ft_putstr(tmp);
-	free(tmp);
-	ft_putstr(" [ ");
+	tmp = ft_strjoin_free(ft_strjoin_free(ft_strdup("#"),
+		ft_itoa_base((ull_t)((*(uint *)&point.col) << 8) >> 8, 16)),
+		ft_strdup(" [ "));
 	if (point.pos.x >= 0)
-		ft_putstr(" ");
-	print_double(point.pos.x, PRECISION);
-	ft_putstr(" , ");
+		tmp = ft_strjoin_free(tmp, ft_strdup(" "));
+	tmp = ft_strjoin_free(ft_strjoin_free(tmp,
+		infinite_double(point.pos.x, PRECISION)), ft_strdup(" , "));
 	if (point.pos.y >= 0)
-		ft_putstr(" ");
-	print_double(point.pos.y, PRECISION);
-	ft_putstr(" , ");
+		tmp = ft_strjoin_free(tmp, ft_strdup(" "));
+	tmp = ft_strjoin_free(ft_strjoin_free(tmp,
+		infinite_double(point.pos.y, PRECISION)), ft_strdup(" , "));
 	if (point.pos.z >= 0)
-		ft_putstr(" ");
-	print_double(point.pos.z, PRECISION);
-	ft_putstr(" ]");
+		tmp = ft_strjoin_free(tmp, ft_strdup(" "));
+	return (ft_strjoin_free(ft_strjoin_free(tmp,
+		infinite_double(point.pos.x, PRECISION)), ft_strdup(" ]")));
 }
 
 void
@@ -44,12 +42,11 @@ void
 	char	*tmp;
 
 	i = 0;
-	while (i < m.v_len)
-	{
-		ft_putstr("v[");
-		ft_putnbr(i);
-		ft_putstr("]\t\t");
-		fdf_xyz(m.v[i++]);
-		ft_putendl(0);
-	}
+	tmp = ft_strnew(0);
+	while (i++ < m.v_len)
+		tmp = ft_strjoin_free(ft_strjoin_free(ft_strjoin_free(ft_strjoin_free(
+			ft_strjoin_free(tmp, ft_strdup("v[")), ft_itoa(i - 1)),
+				ft_strdup("]\t\t")), fdf_xyz(m.v[i - 1])), ft_strdup("\n"));
+	ft_putstr(tmp);
+	free(tmp);
 }

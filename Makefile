@@ -10,11 +10,13 @@ LIBFT		=	$(LIBFTDIR)/libft.a
 MLXLIB		=	$(MLXLIBDIR)/libmlx.a
 CFILES		=	$(shell find ./source ! -name "._*" -regex ".*\\.[c]")
 LCFILES		=	$(shell find ./libft ! -name "._*" -regex ".*\\.[c]")
+MCFILES		=	$(shell find ./minilibx ! -name "._*" -regex ".*\\.[cm]")
+INCLUDE		=	-I{$(MLXLIBDIR)}
 
 SRC	= $(addprefix $(SRCDIR), $(notdir $(filter %.c, $(filter-out ._%, $(wildcard $(SRCDIR)*)))))
 OBJ	= $(notdir $(SRC:%.c=%.o))
 
-CFLAGS	= -Wall -Werror -Wextra
+CFLAGS	= -O2 -Wall -Werror -Wextra
 FF		= -framework OpenGL -framework AppKit
 
 ####	AUTO SETTING	########################################################
@@ -33,7 +35,7 @@ test: $(LIBFT) $(MLXLIB) $(FDFLIB)
 
 
 build: $(CFILES) $(LCFILES) $(MLXLIB)
-	@gcc -g -o $(NAME) $(FF) $^ -L $(LIBFTDIR) -L $(MLXLIBDIR) -lmlx
+	@gcc -g -o $(NAME) $(FF) $^ -L $(LIBFTDIR) -L $(MLXLIBDIR) -lmlx $(INCLUDE)
 
 test:
 	./$(NAME)

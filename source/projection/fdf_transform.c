@@ -6,25 +6,34 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 23:11:32 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/19 05:16:05 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/19 12:38:21 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
+#define RAD(n)	((n) * PI / 180)
 
-/*
-**  3D-REFERENCE -> TO -> 3D-TRANSFORM
-*/
-
-void
-	fdf_apply_transform(mesh_t *m, tfm_t t)
+v3d_t
+	fdf_transform(v3d_t v, tfm_t t)
 {
-	size_t	i;
+	v3d_t	a;
 
-	i = 0;
-	while (i < m->v_len)
-	{
-		m->v[i].pos = fdf_matrix_translate(m->v[i].pos, t);
-		i++;
-	}
+	v = (v3d_t){
+		t.scale.x * v.x + t.translate.x,
+		t.scale.y * v.y + t.translate.y,
+		t.scale.z * v.z + t.translate.z};
+	a = (v3d_t){RAD(t.rotate.x), RAD(t.rotate.y), RAD(t.rotate.z)};
+	v = (v3d_t){
+		v.x * (1),
+		v.y * (cos(a.x) - sin(a.x)),
+		v.z * (sin(a.x) + cos(a.x))};
+	v = (v3d_t){
+		v.x * (cos(a.y) + sin(a.y)),
+		v.y * (1),
+		v.z * (-sin(a.y) + cos(a.y))};
+	v = (v3d_t){
+		v.x * (cos(a.z) - sin(a.z)),
+		v.y * (sin(a.z) + cos(a.z)),
+		v.z * (1)};
+	return (v);
 }

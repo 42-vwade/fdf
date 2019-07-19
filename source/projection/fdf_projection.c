@@ -6,13 +6,11 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 23:41:38 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/19 09:37:48 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/19 12:55:41 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
-#define F_ISO(p,t)	
-#define F_PERS(p,t)	
 #define F_PROJ_X(i,p,t,x)	{v3d_t a,b,c; x=(i?F_ISO(p,t):F_PER(p,t));}
 #define SCPS(n,res)	(SQ(n) * (res))
 #define VEC_SCL(v,m)	((v3d_t){v.x * m,v.y * m,v.z * m})
@@ -41,14 +39,14 @@ static void
 */
 
 static void
-	fdf_drawline(fdf_t *o, l3d_t *l, v2d_t bound, size_t res)
+	fdf_drawline(fdf_t *o, l3d_t l, v2d_t bound, size_t res)
 {
 	p3d_t	p[2];
 	v3d_t	c;
 	v2d_t	pos;
 
-	p[0] = (p3d_t){VEC_SCL(l->a->pos, res), (pixel_t)l->a->col};
-	p[1] = (p3d_t){VEC_SCL(l->b->pos, res), (pixel_t)l->b->col};
+	p[0] = (p3d_t){VEC_SCL(l.a->pos, res), (pixel_t)l.a->col};
+	p[1] = (p3d_t){VEC_SCL(l.b->pos, res), (pixel_t)l.b->col};
 	c = (v3d_t){0, (p[1].pos.y - p[0].pos.y) / (p[1].pos.x - p[0].pos.x), 0};
 	c.z = sqrt(PYTH(p[1].pos.x - p[0].pos.x, p[1].pos.y - p[0].pos.y, 0));
 	while (c.x < c.z)
@@ -67,11 +65,16 @@ static void
 static void
 	fdf_project(fdf_t *o, char iso, size_t i)
 {
-	l3d_t	*l;
+	l3d_t	l;
+	l2d_t	k;
 
+	while (i++ < o->map.mesh.v_len)
+		o->map.mesh.v[(i - 1) * sizeof(p3d_t)].pos = fdf_transform(
+			o->map.mesh.v_ref[(i - 1) * sizeof(p3d_t)].pos, o->map.transform);
+	i = 0;
 	while (i < o->map.mesh.l_len)
 	{
-		l = (void*)&o->map.mesh.l[i * sizeof(l3d_t)];
+		l = o->map.mesh.l[i * sizeof(l3d_t)];
 		fdf_drawline(o, l, SCL2D(o->dim, 0.5), o->resolution);
 		i++;
 	}

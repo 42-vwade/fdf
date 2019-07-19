@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:43:22 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/19 09:32:33 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/19 14:07:16 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ void
 	o.resolution = MAX(42, (o.dim.x / 2) - WINDOW_PADDING);
 	o.m_image = mlx_new_image(o.m_init, o.dim.x, o.dim.y);
 	o.bmp.line = o.dim.x;
-	o.m_start = mlx_get_data_addr(o.m_image, &(int){BIT_DEPTH},
-		&o.bmp.line, &o.bmp.endian);
+	o.m_start = mlx_get_data_addr(o.m_image, &(int){BIT_DEPTH},&o.bmp.line,
+		&o.bmp.endian);
 	linedraw(o.map.mesh.l->a[0].pos, o.map.mesh.l->b[0].pos, SCL2D(o.dim, 0.5), &o);
 	fdf_projection(&o, o.map.transform, o.iso, 0);
 	mlx_put_image_to_window(o.m_init, o.m_window, o.m_image, 0, 0);
