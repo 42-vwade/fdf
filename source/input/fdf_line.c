@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 15:56:41 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/17 18:29:05 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/19 08:18:50 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ static void
 	i = 0;
 	d = (v3d_t){MAX(d.z, (double)MAX(m.size.x - 1, m.size.y - 1)) / 2.0,
 		_D_D(m.size.y, m.size.x), d.z};
+	d.x = 1;
 	while (i++ < size)
 		v[i - 1].pos = (v3d_t){
 			v[i - 1].pos.x / d.x, v[i - 1].pos.y / d.x, v[i - 1].pos.z / d.x};
@@ -107,8 +108,8 @@ void
 		i++;
 	}
 	m->mesh.l_len = ft_lstlen(list);
-	if (!(m->mesh.l = (l3d_t*)malloc(sizeof(*m->mesh.l) * (m->mesh.l_len))))
-		ft_error("fdf-error: could not allocate vertex lattice");
-	array_create(list, m->mesh.l, 0);
+	fdf_create_line_array(
+		(void*)&m->mesh.l, sizeof(*m->mesh.l) * m->mesh.l_len);
+	array_create(list, (void*)m->mesh.l, 0);
 	vertex_normalize(*m, m->mesh.v, m->mesh.v_len);
 }

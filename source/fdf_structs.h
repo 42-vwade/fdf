@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:49:13 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/17 18:29:10 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/19 09:04:45 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,16 @@ struct	s_pixel
 	unsigned int	r:BIT_DEPTH;
 };
 
+union	u_pixel
+{
+	unsigned int	col;
+	struct s_pixel	rgb;
+};
+
 struct	s_vec2d
 {
-	size_t	x;
-	size_t	y;
+	ssize_t	x;
+	ssize_t	y;
 };
 
 struct	s_vec3d
@@ -81,22 +87,30 @@ struct	s_vec3d
 	double	z;
 };
 
+struct	s_vec4d
+{
+	double	x;
+	double	y;
+	double	z;
+	double	w;
+};
+
 struct	s_point2d
 {
 	v2d_t	pos;
-	pixel_t	color;
+	pixel_t	col;
 };
 
 struct	s_point3d
 {
-	pixel_t	col;
 	v3d_t	pos;
+	pixel_t	col;
 };
 
 struct	s_line2d
 {
-	p2d_t	*a;
-	p2d_t	*b;
+	p2d_t	a;
+	p2d_t	b;
 };
 
 struct	s_line3d
@@ -118,19 +132,36 @@ struct	s_image
 	uint32_t	height;
 };
 
+struct	s_transform
+{
+	v3d_t	translate;
+	v3d_t	rotate;
+	v3d_t	scale;
+};
+
+struct	s_camera
+{
+	v3d_t	pos;
+	ld_t	angle;
+	tfm_t	transform;
+};
+
 struct	s_mesh
 {
-	p3d_t	*v;
-	l3d_t	*l;
-	size_t	v_len;
-	size_t	l_len;
+	p3d_t		*v;
+	const p3d_t	*v_ref;
+	const l3d_t	*l;
+	size_t		v_len;
+	size_t		l_len;
 };
 
 struct	s_map
 {
 	mesh_t	mesh;
 	v2d_t	size;
+	tfm_t	cam;
 	tfm_t	transform;
+	ld_t	aspect;
 };
 
 struct	s_map2d
@@ -141,13 +172,6 @@ struct	s_map2d
 	size_t	v_len;
 	size_t	l_len;
 	v2d_t	size;
-};
-
-struct	s_transform
-{
-	v3d_t	translate;
-	v3d_t	rotate;
-	v3d_t	scale;
 };
 
 struct	s_verify
@@ -168,12 +192,12 @@ struct	s_fdf
 {
 	int		fd;
 	map_t	map;
-	map_t	map_transform;
-	t_map2d	map_draw;
+	t_map2d	map_transform;
 	char	*m_title;
 	void	*m_init;
 	void	*m_window;
 	void	*m_image;
+	void	*m_start;
 	char	iso;
 	char	key;
 	char	mouse;
@@ -190,11 +214,5 @@ struct	s_fdf
 /*
 ** UNION
 */
-
-union	u_pixel
-{
-	unsigned int	col;
-	struct s_pixel	rgb;
-};
 
 #endif

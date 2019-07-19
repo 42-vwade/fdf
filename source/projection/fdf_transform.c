@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_projection_2d.c                                :+:      :+:    :+:   */
+/*   fdf_transform.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/14 23:41:38 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/17 17:21:52 by viwade           ###   ########.fr       */
+/*   Created: 2019/07/18 23:11:32 by viwade            #+#    #+#             */
+/*   Updated: 2019/07/19 05:16:05 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
-#define F_ISO(p,t)	
-#define F_PERS(p,t)	
-#define F_PROJ_X(i,p,t)	(i?F_ISO(p,t):F_PER(p,t))
 
-p2d_t
-	fdf_project_2d(map_t *m, tfm_t t, char iso, size_t i)
+/*
+**  3D-REFERENCE -> TO -> 3D-TRANSFORM
+*/
+
+void
+	fdf_apply_transform(mesh_t *m, tfm_t t)
 {
-	p3d_t	v;
-	p2d_t	p;
+	size_t	i;
 
-	if (i >= m->mesh.v_len)	
-		ft_error("fdf-error: fdf_projection index mismatch");
-	v = (p3d_t)*(m->mesh.v + i * sizeof(p3d_t));
+	i = 0;
+	while (i < m->v_len)
 	{
-		p.color = v.col;
-		p.pos.x = F_PROJ(iso, v.pos)
-		m.mesh.v[i];
+		m->v[i].pos = fdf_matrix_translate(m->v[i].pos, t);
 		i++;
 	}
-	return (p);
 }

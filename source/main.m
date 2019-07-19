@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 20:04:16 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/17 18:43:19 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/19 07:54:08 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,26 +131,26 @@ static int
 	static int	i;
 //	int		avg = AVG_2D(o->dim);
 	t_img	*b;
-	t_line	ln;
-	t_pixel	test;
+	// t_line	ln;
+	// t_pixel	test;
 
-	test.r = 255;
-	test = (t_pixel){
-		10, 20, 30
-	};
+	// test.r = 255;
+	// test = (t_pixel){
+	// 	10, 20, 30
+	// };
 
 	b = &o->bmp;
-	ln =
-	(t_line){
-		.a = (t_p3d){
-			.pos = (t_3d){0, 0, 0},
-			.col = (t_pixel){.r = 255, .g = 192, .b = 96}
-		},
-		.b = (t_p3d){
-			.pos = (t_3d){0.5, 0.5, 0.5},
-			.col = (t_pixel){.r = 160, .g = 96, .b = 0}
-		},
-	};
+	// ln = 0;
+	// (t_line){
+	// 	.a = (t_p3d){
+	// 		.pos = (t_3d){0, 0, 0},
+	// 		.col = (t_pixel){.r = 255, .g = 192, .b = 96}
+	// 	},
+	// 	.b = (t_p3d){
+	// 		.pos = (t_3d){0.5, 0.5, 0.5},
+	// 		.col = (t_pixel){.r = 160, .g = 96, .b = 0}
+	// 	},
+	// };
 	b->start = (void *)mlx_get_data_addr(b->ref, &b->depth, &b->line, &b->endian);
 	b->start[i] =
 	(t_pixel){
@@ -158,7 +158,7 @@ static int
 		.g = 192 - i % 256,
 		.b = 96 - i % 256
 	};
-	draw_line(o, ln);
+	// draw_line(o, ln);
 	mlx_put_image_to_window(o->mlx.init, o->mlx.window, o->bmp.ref, 0, 0);
 	i = (i + 1) % (o->bmp.width * o->bmp.height);
 	return (0);

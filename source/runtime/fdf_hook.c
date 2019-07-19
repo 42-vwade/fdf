@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 19:32:33 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/17 16:42:16 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/18 23:47:35 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static int
 	key_release(int keycode, fdf_t *o)
 {
 	IF_C(keycode == KEY_ESC, exit(0));
+	IF_C(keycode == KEY_ARROW_RIGHT, o->map.transform.rotate.x += 0.1);
+	IF_C(keycode == KEY_ARROW_LEFT, o->map.transform.rotate.x -= 0.1);
 	return (!(o->key = 0));
 }
 

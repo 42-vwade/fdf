@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_window_size.c                                  :+:      :+:    :+:   */
+/*   fdf_matrix_math.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/12 16:42:48 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/19 01:27:58 by viwade           ###   ########.fr       */
+/*   Created: 2019/07/18 21:44:58 by viwade            #+#    #+#             */
+/*   Updated: 2019/07/19 02:28:02 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-v2d_t	fdf_window_size(v2d_t size)
+v3d_t
+	fdf_matrix_translate(v3d_t v, tfm_t t)
 {
-	size_t	v;
-
-	v = MAX(size.x, size.y) * LINE_RESOLUTION;
-	v = MIN(VIEW_RES_MAX, v);
-	return ((v2d_t){v, v});
-	return ((v2d_t){
-		.x = MAX(CONTROL_PANEL_X + VIEW_RES_MIN, CONTROL_PANEL_X + v),
-		.y = MAX(CONTROL_PANEL_Y + VIEW_RES_MIN, CONTROL_PANEL_Y + v)
+	return ((v3d_t){
+		(double){
+			cos(t.rotate.y * PI / 180) * v.x
+		},
+		(double){
+			cos(t.rotate.x * PI / 180) * v.y,
+		},
+		(double){
+			cos(t.rotate.z * PI / 180) * v.z
+		}
 	});
 }

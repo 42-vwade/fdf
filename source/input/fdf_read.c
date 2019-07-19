@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 10:37:13 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/15 00:44:55 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/19 05:32:11 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void
 	char		*tmp;
 
 	ft_bzero(&v, sizeof(v));
-	while (!(get_next_line(fd, &v.line) > 0))
+	while (get_next_line(fd, &v.line) > 0)
 	{
 		tmp = v.line;
 		if (!v.line[0])
@@ -125,10 +125,11 @@ void
 		v.row++;
 	}
 	m->size = (v2d_t){v.cols, v.row};
-	m->mesh.v_len = ft_lstlen(v.lst);
-	if (!(m->mesh.v = (t_point *)malloc(sizeof(t_point) * (m->mesh.v_len))))
-		ft_error("fdf-error: could not allocate vertex array");
-	ft_bzero(m->mesh.v, sizeof(t_point) * (m->mesh.v_len));
+	fdf_create_vertex_array(&m->mesh.v, m->mesh.v_len = ft_lstlen(v.lst));
+	fdf_create_vertex_array((void *)&m->mesh.v_ref, m->mesh.v_len);
 	array_create(v.lst, m->mesh.v);
+	ft_memcpy((void *)m->mesh.v_ref, m->mesh.v, m->mesh.v_len * sizeof(p3d_t));
+	m->aspect = (double)m->size.y / (double)m->size.x;
+	m->cam.translate.z = ft_sqrt(2);
 	m->transform.scale = (v3d_t){1, 1, 1};
 }

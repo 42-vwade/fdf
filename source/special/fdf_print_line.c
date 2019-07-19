@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 04:40:35 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/14 17:47:03 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/19 07:24:15 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void
 	i = 0;
 	while (i < m.l_len)
 	{
-		l = m.l + i * sizeof(l3d_t);
+		l = (void*)&m.l[i * sizeof(l3d_t)];
 		ft_putstr("line[");
 		ft_putnbr(i);
 		ft_putstr("]");
