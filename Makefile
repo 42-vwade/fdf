@@ -7,7 +7,7 @@ LIBFTDIR	=	libft
 MLXLIBDIR	=
 FDFLIB		=	libfdf.a
 LIBFT		=	libft/libft.a
-MLXLIB		=	minilibx/libmlx.a
+MLXLIB		=	.minilibx/libmlx.a
 CFILES		=	$(shell find ./source ! -name "._*" -regex ".*\\.[c]")
 LCFILES		=	$(shell find ./libft ! -name "._*" -regex ".*\\.[c]")
 
@@ -32,7 +32,7 @@ build: $(CFILES) $(LCFILES) $(MLXLIB)
 	@gcc -g -o $(NAME) $(FF) $^ -L $(dir $(LIBFT)) -L $(dir $(MLXLIB)) -lmlx
 
 $(NAME): $(LIBFT) $(MLXLIB) $(FDFLIB)
-	@gcc -o $@ $(CFLAGS) $(FF) $^ -L $(dir $(LIBFT)) -L $(dir $(MLXLIB)) -lmlx -lft
+	@gcc -o $(NAME) $(CFLAGS) $(FF) $^ -L $(dir $(LIBFT)) -L $(dir $(MLXLIB)) -lmlx -lft
 
 $(FDFLIB): $(OBJECTS) | $(OBJDIR) $(BUILDDIR)
 	@ar rcu $@ $(OBJDIR)/*.o
