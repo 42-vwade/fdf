@@ -6,12 +6,22 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 10:39:33 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/20 03:41:26 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 08:52:15 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef _FDF_MACROS_H
 # define _FDF_MACROS_H
+
+/*
+**	COLORS
+*/
+
+# define VBLUE	0x00c0FF
+# define VDAWN	0xFF6000
+# define VWHTE	0xFFFFFF
+# define VGREY	0x808080
+# define VZERO	0xc0f060
 
 /*
 **	SETTINGS

@@ -200,6 +200,7 @@ struct	s_fdf
 	char	iso;
 	char	key;
 	char	mouse;
+	v2d_t	mouse_xy;
 	char	mode;
 	char	modes;
 	size_t	width;

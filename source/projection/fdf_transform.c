@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 23:11:32 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/20 07:49:53 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 09:55:22 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ v3d_t
 	angle = (v3d_t){D2RAD(t.rotate.x), D2RAD(t.rotate.y), D2RAD(t.rotate.z)};
 	v = (v3d_t){
 		v.x * (1),
-		v.y * cos(angle.x) -	 v.z * sin(angle.x),
+		v.y * cos(angle.x) - v.z * sin(angle.x),
 		v.z * cos(angle.x) + v.y * sin(angle.x)};
 	v = (v3d_t){
 		v.x * cos(angle.y) + v.z * sin(angle.y),

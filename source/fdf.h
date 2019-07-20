@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 10:43:39 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/20 06:25:38 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 10:21:55 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,13 @@ void	fdf_print_line(mesh_t map_object);
 v2d_t	fdf_window_size(v2d_t map_size);
 void	fdf_hook(fdf_t *o);
 int		fdf_run_loop(fdf_t *o);
-void	fdf_projection(fdf_t *o, tfm_t t, char iso, size_t i);
+void	fdf_projection(fdf_t *o);
 void	fdf_draw(t_map2d *m);
 void	fdf_pixel(fdf_t *o, v2d_t pos, pixel_t col);
 
 v3d_t	fdf_transform(v3d_t reference_vector, tfm_t transform);
 
+void	fdf_redraw(fdf_t *o);
 void	fdf_color_mode(fdf_t *o);
 void	*fdf_keyboard(size_t i);
 int		key_press(int keycode, fdf_t *o);

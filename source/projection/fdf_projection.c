@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 23:41:38 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/20 06:21:45 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 10:25:34 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #define F_PROJ_X(i,p,t,x)	{v3d_t a,b,c; x=(i?F_ISO(p,t):F_PER(p,t));}
 #define SCPS(n,res)	(SQ(n) * (res))
 #define SL0(n)	(MIN(1, (n)))
-#define SL1(a,b,n)	((a).x<(b).x?SL0(n?1/n:0):-SL0(n?1/n:0))
+#define SL1(a,b,n)	((a).x<(b).x?SL0(n?1/n:1):-SL0(n?1/n:1))
 #define SL2(a,b,n)	((a).y<(b).y?SL0(n):-SL0(n))
 #define SL4(a,b)	((b.pos.y - a.pos.y) / (b.pos.x - a.pos.x))
 #define VEC_SCL(v,m)	((v3d_t){v.x * m,v.y * m,v.z * m})
@@ -58,27 +58,20 @@ static void
 	}
 }
 
-static void
-	fdf_project(fdf_t *o, char iso, size_t i)
+void
+	fdf_projection(fdf_t *o)
 {
 	l3d_t	*l;
+	size_t	i;
 
+	i = 0;
 	while ((i++ < o->map.mesh.v_len) || (i = 0))
 		o->map.mesh.v[i - 1].pos = fdf_transform(o->map.mesh.ref_v[i - 1].pos,
 			o->map.transform);
-// iso will determine projection
 	while (i < o->map.mesh.l_len)
 	{
 		l = (void*)&o->map.mesh.l[i * sizeof(l3d_t)];
 		fdf_drawline(o, l, SCL2D(o->dim, 0.5), o->resolution);
 		i++;
 	}
-}
-
-void
-	fdf_projection(fdf_t *o, tfm_t t, char iso, size_t i)
-{
-	if (i >= o->map.mesh.v_len)
-		ft_error("fdf-error: fdf_projection index mismatch");
-	fdf_project(o, iso, i);
 }

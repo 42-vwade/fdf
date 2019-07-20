@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 04:40:35 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/20 05:57:18 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 08:05:48 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,12 @@ void
 		ft_putendl(" ]");
 		i++;
 	}
+	ft_putstr("[ ");
+	ft_putnbr(m.v_len);
+	ft_putstr(" ] Total Points\n");
+	ft_putstr("[ ");
+	ft_putnbr(m.l_len);
+	ft_putstr(" ] Total Lines\n");
 }
 
 /*
