@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 10:43:39 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/20 10:21:55 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 14:47:42 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <time.h>
 # include <pthread.h>
 # include "keycodes_mac.h"
+# include "mousecodes_mac.h"
 # include "fdf_macros.h"
 # include "fdf_structs.h"
 # include "../minilibx/mlx.h"
@@ -44,11 +45,13 @@ void	fdf_print_line(mesh_t map_object);
 v2d_t	fdf_window_size(v2d_t map_size);
 void	fdf_hook(fdf_t *o);
 int		fdf_run_loop(fdf_t *o);
+void	fdf_reset(fdf_t *o);
 void	fdf_projection(fdf_t *o);
 void	fdf_draw(t_map2d *m);
 void	fdf_pixel(fdf_t *o, v2d_t pos, pixel_t col);
 
 v3d_t	fdf_transform(v3d_t reference_vector, tfm_t transform);
+v3d_t	fdf_rotate2d(v2d_t t, v3d_t v);
 
 void	fdf_redraw(fdf_t *o);
 void	fdf_color_mode(fdf_t *o);

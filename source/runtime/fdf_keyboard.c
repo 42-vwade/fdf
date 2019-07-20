@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 16:42:26 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/20 11:37:20 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 15:12:46 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,19 @@
 int
 	key_press(int key, fdf_t *o)
 {
+	ft_putstr("keyboard: key pressed ");
+	ft_putnbr(key);
+	ft_putendl(0);
 	IF_C(key == KEY_P, o->iso = o->iso ? 0 : 1);
 	IF_C(o->mode += key == KEY_C, fdf_color_mode(o));
-	return (o->key = 1);
+	IF_C(key == KEY_R, fdf_reset(o));
+	return (o->key = key);
 }
 
 int
 	key_release(int key, fdf_t *o)
 {
 	IF_C(key == KEY_ESC, exit(0));
-	K_MOV(key, o->map.transform.translate, o->redraw);
 	return (!(o->key = 0));
 }
 
@@ -40,9 +43,7 @@ int
 	key_event(int key, fdf_t *o)
 {
 	if (o->key)
-	{
 		K_MOV(key, o->map.transform.translate, o->redraw);
-	}
 	return (1);
 }
 

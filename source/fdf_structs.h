@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:49:13 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/20 07:09:22 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 14:59:59 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,7 +199,7 @@ struct	s_fdf
 	void	*m_start;
 	char	iso;
 	char	key;
-	char	mouse;
+	char	mouse[16];
 	v2d_t	mouse_xy;
 	char	mode;
 	char	modes;
