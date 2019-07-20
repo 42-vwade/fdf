@@ -6,34 +6,13 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:43:22 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/20 04:53:19 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 07:36:39 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #define SL0(n)	((n)/ABS(n))
 #define SCL2D(v,m)		((v2d_t){(v).x*(m),(v).y*(m)})
-
-static void
-	linedraw(v3d_t a, v3d_t b, v2d_t bound, fdf_t *o)
-{
-	v3d_t	c;
-	v2d_t	pos;
-
-	c = (v3d_t){0, (b.y - a.y) / (b.x - a.x), 0};
-	c.z = sqrt(PYTH(b.x - a.x, b.y - a.y, b.z - a.z));
-	while (c.x < c.z)
-	{
-		pos = (v2d_t){a.x + (c.x * MIN(SL0(c.y), 1 / c.y)),
-					a.y + (c.x * MIN(SL0(c.y), c.y))};
-		if (ABS(pos.x) < bound.x && ABS(pos.y) < bound.y)
-			fdf_pixel(o, pos, (pixel_t){
-		.r = (255 * (1 - (c.x / c.z))) + 0 * (c.x / c.z),
-		.g = (96 * (1 - (c.x / c.z))) + 192 * (c.x / c.z),
-		.b = (0 * (1 - (c.x / c.z))) + 255 * (c.x / c.z)});
-		c.x += 1;
-	}
-}
 
 /*
 **	Initialization – Things we need for fdf_t (o)
@@ -43,6 +22,7 @@ static void
 **		Set window dimensions (dim)
 **		Create window instance (m_window)
 **		Set raster resolution (resolution)
+**		Set color mode (0: default, 1: heightmap)
 */
 
 void
@@ -61,9 +41,10 @@ void
 	o.bmp.line = o.dim.x;
 	o.m_start = mlx_get_data_addr(o.m_image, &(int){BIT_DEPTH},
 		&o.bmp.line, &o.bmp.endian);
-	linedraw((v3d_t){-99, -99, 0}, (v3d_t){99, 99, 0}, SCL2D(o.dim, 0.5), &o);
-	linedraw((v3d_t){0, 0, 0}, (v3d_t){20, 60, 0}, SCL2D(o.dim, 0.5), &o);
-	o.map.transform.rotate = (v3d_t){0, 0, 10};
+	o.map.transform.scale = (v3d_t){.8, .8, .8};
+	o.map.transform.rotate = (v3d_t){60, 30, 0};
+	o.mode = 1;
+	fdf_color_mode(&o);
 	fdf_projection(&o, o.map.transform, o.iso, 0);
 	mlx_put_image_to_window(o.m_init, o.m_window, o.m_image, 0, 0);
 	fdf_hook(&o);

@@ -6,18 +6,21 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 23:41:38 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/20 05:26:01 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 06:21:45 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 #define F_PROJ_X(i,p,t,x)	{v3d_t a,b,c; x=(i?F_ISO(p,t):F_PER(p,t));}
 #define SCPS(n,res)	(SQ(n) * (res))
-#define SL0(n)	((n)<0?(MAX(-1,(n))):(MIN(1, (n))))
-#define SL1(a,b,n)	((a)<(b)?SL0(ABS(n?1/n:0)):-SL0(ABS(n?1/n:0)))
-#define SL2(n)	(MIN(1, (n)))
+#define SL0(n)	(MIN(1, (n)))
+#define SL1(a,b,n)	((a).x<(b).x?SL0(n?1/n:0):-SL0(n?1/n:0))
+#define SL2(a,b,n)	((a).y<(b).y?SL0(n):-SL0(n))
+#define SL4(a,b)	((b.pos.y - a.pos.y) / (b.pos.x - a.pos.x))
 #define VEC_SCL(v,m)	((v3d_t){v.x * m,v.y * m,v.z * m})
 #define SCL2D(v,m)		((v2d_t){(v).x*(m),(v).y*(m)})
+#define LEN2D(a,b)		(MAX(ABS(b.x-a.x),ABS(b.y-a.y)))
+#define LEN3D(a,b)		(MAX(MAX(ABS(b.x-a.x),ABS(b.y-a.y)),ABS(b.z-a.z)))
 
 /*
 **	Copy verts at line and scale normalized space into screen space
@@ -39,12 +42,13 @@ static void
 
 	p[0] = (p3d_t){VEC_SCL(l->a->pos, res), (pixel_t)l->a->col};
 	p[1] = (p3d_t){VEC_SCL(l->b->pos, res), (pixel_t)l->b->col};
-	c = (v3d_t){0, (p[1].pos.y - p[0].pos.y) / (p[1].pos.x - p[0].pos.x), 0};
+	c = (v3d_t){0, ABS(SL4(p[0], p[1])), 0};
 	c.z = sqrt(PYTH(p[1].pos.x - p[0].pos.x, p[1].pos.y - p[0].pos.y, 0));
+	c.z = LEN2D(p[0].pos, p[1].pos);
 	while (c.x < c.z)
 	{
-		pos = (v2d_t){p[0].pos.x + (c.x * SL1(p[0].pos.x, p[1].pos.x, c.y)),
-					p[0].pos.y + (c.x * SL0(c.y))};
+		pos = (v2d_t){p[0].pos.x + (c.x * SL1(p[0].pos, p[1].pos, c.y)),
+					p[0].pos.y + (c.x * SL2(p[0].pos, p[1].pos, c.y))};
 		if (ABS(pos.x) < bound.x && ABS(pos.y) < bound.y)
 			fdf_pixel(o, pos, (pixel_t){
 		.r = (p[0].col.r * (1 - (c.x / c.z))) + p[1].col.r * (c.x / c.z),

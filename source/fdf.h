@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 10:43:39 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/20 02:29:26 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 06:25:38 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	fdf_pixel(fdf_t *o, v2d_t pos, pixel_t col);
 
 v3d_t	fdf_transform(v3d_t reference_vector, tfm_t transform);
 
+void	fdf_color_mode(fdf_t *o);
 void	*fdf_keyboard(size_t i);
 int		key_press(int keycode, fdf_t *o);
 int		key_release(int keycode, fdf_t *o);

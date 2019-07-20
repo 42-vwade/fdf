@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 04:40:35 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/20 02:54:10 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 05:57:27 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void
 	char	*tmp;
 
 	i = 0;
-	while (i < m.v_len)
+	while (i <= 200 && i < m.v_len)
 	{
 		ft_putstr("v[");
 		ft_putnbr(i);
