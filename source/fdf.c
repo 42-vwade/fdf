@@ -6,11 +6,12 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:43:22 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/20 02:25:27 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 04:53:19 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#define SL0(n)	((n)/ABS(n))
 #define SCL2D(v,m)		((v2d_t){(v).x*(m),(v).y*(m)})
 
 static void
@@ -23,8 +24,8 @@ static void
 	c.z = sqrt(PYTH(b.x - a.x, b.y - a.y, b.z - a.z));
 	while (c.x < c.z)
 	{
-		pos = (v2d_t){a.x + (c.x * MIN(1, 1 / c.y)),
-					a.y + (c.x * MIN(1, c.y))};
+		pos = (v2d_t){a.x + (c.x * MIN(SL0(c.y), 1 / c.y)),
+					a.y + (c.x * MIN(SL0(c.y), c.y))};
 		if (ABS(pos.x) < bound.x && ABS(pos.y) < bound.y)
 			fdf_pixel(o, pos, (pixel_t){
 		.r = (255 * (1 - (c.x / c.z))) + 0 * (c.x / c.z),
@@ -60,7 +61,9 @@ void
 	o.bmp.line = o.dim.x;
 	o.m_start = mlx_get_data_addr(o.m_image, &(int){BIT_DEPTH},
 		&o.bmp.line, &o.bmp.endian);
-	linedraw(o.map.mesh.l->a[0].pos, o.map.mesh.l->b[0].pos, SCL2D(o.dim, 0.5), &o);
+	linedraw((v3d_t){-99, -99, 0}, (v3d_t){99, 99, 0}, SCL2D(o.dim, 0.5), &o);
+	linedraw((v3d_t){0, 0, 0}, (v3d_t){20, 60, 0}, SCL2D(o.dim, 0.5), &o);
+	o.map.transform.rotate = (v3d_t){0, 0, 10};
 	fdf_projection(&o, o.map.transform, o.iso, 0);
 	mlx_put_image_to_window(o.m_init, o.m_window, o.m_image, 0, 0);
 	fdf_hook(&o);

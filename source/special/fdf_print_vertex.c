@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 04:40:35 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/14 17:47:20 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 02:54:10 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void
 		ft_putstr("v[");
 		ft_putnbr(i);
 		ft_putstr("]\t\t");
-		fdf_xyz(m.v[i++]);
+		fdf_xyz(m.ref_v[i++]);
 		ft_putendl(0);
 	}
 }

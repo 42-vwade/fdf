@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 15:56:41 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/19 09:23:13 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 02:56:07 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,12 @@ static void
 
 	i = 0;
 	d = (v3d_t){0, 0, 0};
-	while (i++ < size)
+	while ((i++ < size) || (i = 0))
 		d.z = MAX(d.z, ABS(v[i - 1].pos.z));
-	i = 0;
 	d = (v3d_t){(double)(m.size.x - 1) / 2, (double)(m.size.y - 1) / 2, d.z};
-	while (i++ < size)
+	while ((i++ < size) || (i = 0))
 		v[i - 1].pos = (v3d_t){
 			v[i - 1].pos.x - d.x, v[i - 1].pos.y - d.y, v[i - 1].pos.z};
-	i = 0;
 	d = (v3d_t){MAX(d.z, (double)MAX(m.size.x - 1, m.size.y - 1)) / 2.0,
 		_D_D(m.size.y, m.size.x), d.z};
 	while (i++ < size)
@@ -111,4 +109,6 @@ void
 		(void*)&m->mesh.l, sizeof(*m->mesh.l) * m->mesh.l_len);
 	array_create(list, (void*)m->mesh.l, 0);
 	vertex_normalize(*m, m->mesh.v, m->mesh.v_len);
+	fdf_create_vertex_array((void *)&m->mesh.ref_v, m->mesh.v_len);
+	ft_memcpy((void *)m->mesh.ref_v, m->mesh.v, m->mesh.v_len * sizeof(p3d_t));
 }

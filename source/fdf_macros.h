@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 10:39:33 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/19 03:32:06 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 03:41:26 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define CONTROL_PANEL_X	240
 # define CONTROL_PANEL_Y	420
 # define VIEW_RES_MIN	(2 * CONTROL_PANEL_X)
-# define VIEW_RES_MAX	(3 * CONTROL_PANEL_X)
+# define VIEW_RES_MAX	(5 * CONTROL_PANEL_X)
 
 /*
 **	TYPE DEFINITION

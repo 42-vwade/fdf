@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:49:13 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/20 02:40:48 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 02:48:46 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,7 +192,6 @@ struct	s_fdf
 {
 	int		fd;
 	map_t	map;
-	t_map2d	map_transform;
 	char	*m_title;
 	void	*m_init;
 	void	*m_window;

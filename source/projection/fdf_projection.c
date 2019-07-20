@@ -6,15 +6,16 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 23:41:38 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/20 02:40:04 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 05:26:01 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
-#define F_ISO(p,t)
-#define F_PERS(p,t)
 #define F_PROJ_X(i,p,t,x)	{v3d_t a,b,c; x=(i?F_ISO(p,t):F_PER(p,t));}
 #define SCPS(n,res)	(SQ(n) * (res))
+#define SL0(n)	((n)<0?(MAX(-1,(n))):(MIN(1, (n))))
+#define SL1(a,b,n)	((a)<(b)?SL0(ABS(n?1/n:0)):-SL0(ABS(n?1/n:0)))
+#define SL2(n)	(MIN(1, (n)))
 #define VEC_SCL(v,m)	((v3d_t){v.x * m,v.y * m,v.z * m})
 #define SCL2D(v,m)		((v2d_t){(v).x*(m),(v).y*(m)})
 
@@ -42,8 +43,8 @@ static void
 	c.z = sqrt(PYTH(p[1].pos.x - p[0].pos.x, p[1].pos.y - p[0].pos.y, 0));
 	while (c.x < c.z)
 	{
-		pos = (v2d_t){p[0].pos.x + (c.x * MIN(1, 1 / c.y)),
-					p[0].pos.y + (c.x * MIN(1, c.y))};
+		pos = (v2d_t){p[0].pos.x + (c.x * SL1(p[0].pos.x, p[1].pos.x, c.y)),
+					p[0].pos.y + (c.x * SL0(c.y))};
 		if (ABS(pos.x) < bound.x && ABS(pos.y) < bound.y)
 			fdf_pixel(o, pos, (pixel_t){
 		.r = (p[0].col.r * (1 - (c.x / c.z))) + p[1].col.r * (c.x / c.z),
