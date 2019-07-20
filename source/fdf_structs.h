@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:49:13 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/20 16:34:53 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 16:47:14 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <time.h>
 # include <pthread.h>
 # include "fdf_macros.h"
-# include "../minilibx/mlx.h"
+# include "../.minilibx/mlx.h"
 # include "../libft/libft.h"
 
 /*
