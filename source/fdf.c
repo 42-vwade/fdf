@@ -6,23 +6,12 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:43:22 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/19 09:32:33 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 02:25:27 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #define SCL2D(v,m)		((v2d_t){(v).x*(m),(v).y*(m)})
-
-static void
-	fdf_pixel(fdf_t *o, v2d_t pos, pixel_t col)
-{
-	unsigned int	*screen;
-
-	screen = o->m_start;
-	pos.x = pos.x + (o->dim.x / 2);
-	pos.y = pos.y + (o->dim.y / 2);
-	screen[(pos.y * o->dim.x) + pos.x] = *(int *)&col;
-}
 
 static void
 	linedraw(v3d_t a, v3d_t b, v2d_t bound, fdf_t *o)

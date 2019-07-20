@@ -6,28 +6,17 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 23:41:38 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/19 09:37:48 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 02:25:50 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
-#define F_ISO(p,t)	
-#define F_PERS(p,t)	
+#define F_ISO(p,t)
+#define F_PERS(p,t)
 #define F_PROJ_X(i,p,t,x)	{v3d_t a,b,c; x=(i?F_ISO(p,t):F_PER(p,t));}
 #define SCPS(n,res)	(SQ(n) * (res))
 #define VEC_SCL(v,m)	((v3d_t){v.x * m,v.y * m,v.z * m})
 #define SCL2D(v,m)		((v2d_t){(v).x*(m),(v).y*(m)})
-
-static void
-	fdf_pixel(fdf_t *o, v2d_t pos, pixel_t col)
-{
-	unsigned int	*screen;
-
-	screen = o->m_start;
-	pos.x = pos.x + (o->dim.x / 2);
-	pos.y = pos.y + (o->dim.y / 2);
-	screen[(pos.y * o->dim.x) + pos.x] = *(int *)&col;
-}
 
 /*
 **	Copy verts at line and scale normalized space into screen space
