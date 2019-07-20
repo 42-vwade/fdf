@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 20:18:14 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/18 20:34:30 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 16:38:15 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void
 	fdf_create_vertex_array(p3d_t **dst, size_t size)
 {
-
 	dst[0] = NULL;
 	if (!(dst[0] = (t_point *)malloc(sizeof(t_point) * size)))
 		ft_error("fdf-error: could not allocate vertex array");

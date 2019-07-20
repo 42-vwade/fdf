@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 23:11:32 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/20 12:28:05 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 16:37:56 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ v3d_t
 v3d_t
 	fdf_rotate2d(v2d_t t, v3d_t v)
 {
-//	t = (v2d_t){D2RAD((double)t.x), D2RAD((double)t.y)};
+	t = (v2d_t){D2RAD((double)t.x), D2RAD((double)t.y)};
 	v = (v3d_t){
 		v.x * (1),
 		v.y * cos(t.x) - v.z * sin(t.x),
@@ -50,10 +50,10 @@ v3d_t
 		v.x * cos(t.y) + v.z * sin(t.y),
 		v.y * (1),
 		v.z * cos(t.y) - v.x * sin(t.y)};
-	// v = (v3d_t){
-	// 	v.x * cos(angle.z) + v.y * sin(angle.z),
-	// 	v.y * cos(angle.z) - v.x * sin(angle.z),
-	// 	v.z * (1)};
+	v = (v3d_t){
+		v.x * cos(angle.z) + v.y * sin(angle.z),
+		v.y * cos(angle.z) - v.x * sin(angle.z),
+		v.z * (1)};
 	return ((v3d_t){
 			v.x + t.x,
 			v.y + t.y,
