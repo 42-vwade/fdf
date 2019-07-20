@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 06:25:15 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/20 07:33:09 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 07:54:24 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #define VBLUE	0x00c0FF
 #define VDAWN	0xFF6000
 #define V_WH	0xFFFFFF
-#define U_DF(v,c)	(uint)(((V_WH * (1 - SQ(v))) + (SQ(v) * c))) << 8
+#define U_DF(v,c)	(uint)(((V_WH * (1.0 - SQ(v))) + (SQ(v) * c))) << 8
 #define ASNC(a,v)	*(uint*)&a.col = *(uint*)&v.col
-#define ASNH(a,v,c)	*(uint*)&a.col = (uint)((U_DF(v,c)) >> 8)
+#define ASNH(a,v,c)	*(uint*)&a.col = (uint)((U_DF((double)v,c)) >> 8)
 
 void	fdf_color_mode(fdf_t *o)
 {

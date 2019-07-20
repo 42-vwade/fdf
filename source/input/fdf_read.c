@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 10:37:13 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/20 02:55:38 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 07:47:08 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,4 +130,5 @@ void
 	m->aspect = (double)m->size.y / (double)m->size.x;
 	m->cam.translate.z = ft_sqrt(2);
 	m->transform.scale = (v3d_t){1, 1, 1};
+	ft_putendl("fdf: read complete");
 }

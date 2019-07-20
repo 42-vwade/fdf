@@ -6,13 +6,11 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:43:22 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/20 07:36:39 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 07:48:51 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#define SL0(n)	((n)/ABS(n))
-#define SCL2D(v,m)		((v2d_t){(v).x*(m),(v).y*(m)})
 
 /*
 **	Initialization – Things we need for fdf_t (o)
@@ -42,7 +40,7 @@ void
 	o.m_start = mlx_get_data_addr(o.m_image, &(int){BIT_DEPTH},
 		&o.bmp.line, &o.bmp.endian);
 	o.map.transform.scale = (v3d_t){.8, .8, .8};
-	o.map.transform.rotate = (v3d_t){60, 30, 0};
+	o.map.transform.rotate = (v3d_t){60, 30, 10};
 	o.mode = 1;
 	fdf_color_mode(&o);
 	fdf_projection(&o, o.map.transform, o.iso, 0);

@@ -6,11 +6,13 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 07:37:58 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/20 07:38:45 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 07:48:06 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
+#define SL0(n)	((n)/ABS(n))
+#define SCL2D(v,m)		((v2d_t){(v).x*(m),(v).y*(m)})
 
 void
 	linedraw(v3d_t a, v3d_t b, v2d_t bound, fdf_t *o)

@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 23:11:32 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/20 05:48:17 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 07:49:53 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ v3d_t
 		v.y * cos(angle.x) -	 v.z * sin(angle.x),
 		v.z * cos(angle.x) + v.y * sin(angle.x)};
 	v = (v3d_t){
-		v.x * cos(angle.y) - v.z * sin(angle.y),
+		v.x * cos(angle.y) + v.z * sin(angle.y),
 		v.y * (1),
-		v.z * cos(angle.y) + v.x * sin(angle.y)};
+		v.z * cos(angle.y) - v.x * sin(angle.y)};
 	v = (v3d_t){
 		v.x * cos(angle.z) + v.y * sin(angle.z),
 		v.y * cos(angle.z) - v.x * sin(angle.z),
