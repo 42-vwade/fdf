@@ -2,5 +2,5 @@
 	path = libft
 	url = https://github.com/vwade/42-libft.git
 [submodule "minilibx"]
-	path = minilibx
+	path = .minilibx
 	url = git@github.com:vwade/42-miniLibX.git
