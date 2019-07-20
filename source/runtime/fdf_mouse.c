@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 17:33:10 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/20 15:40:17 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 15:50:13 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@ int
 	mouse_down(int button, int x, int y, fdf_t *o)
 {
 	o->mouse[button] = 1;
-	ft_putstr("mouse: button pressed ");
-	ft_putnbr(button);
-	ft_putendl(0);
 	o->mouse_xy = (v2d_t){x, y};
 	if ((o->redraw = (o->mouse[4] || o->mouse[5])))
 		M_SCL(o->map.transform.scale, o->mouse[4], o->mouse[5]);
