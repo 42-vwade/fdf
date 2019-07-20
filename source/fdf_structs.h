@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:49:13 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/19 09:04:45 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 02:40:48 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ struct	s_camera
 struct	s_mesh
 {
 	p3d_t		*v;
-	const p3d_t	*v_ref;
+	const p3d_t	*ref_v;
 	const l3d_t	*l;
 	size_t		v_len;
 	size_t		l_len;

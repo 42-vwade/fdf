@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 10:37:13 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/19 10:38:26 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 02:36:45 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,9 +126,9 @@ void
 	}
 	m->size = (v2d_t){v.cols, v.row};
 	fdf_create_vertex_array(&m->mesh.v, m->mesh.v_len = ft_lstlen(v.lst));
-	fdf_create_vertex_array((void *)&m->mesh.v_ref, m->mesh.v_len);
+	fdf_create_vertex_array((void *)&m->mesh.ref_v, m->mesh.v_len);
 	array_create(v.lst, m->mesh.v);
-	ft_memcpy((void *)m->mesh.v_ref, m->mesh.v, m->mesh.v_len * sizeof(p3d_t));
+	ft_memcpy((void *)m->mesh.ref_v, m->mesh.v, m->mesh.v_len * sizeof(p3d_t));
 	m->aspect = (double)m->size.y / (double)m->size.x;
 	m->cam.translate.z = ft_sqrt(2);
 	m->transform.scale = (v3d_t){1, 1, 1};

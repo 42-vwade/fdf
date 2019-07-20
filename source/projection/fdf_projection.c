@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 23:41:38 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/20 02:25:50 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 02:40:04 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,10 @@ static void
 {
 	l3d_t	*l;
 
+	while ((i++ < o->map.mesh.v_len) || (i = 0))
+		o->map.mesh.v[i - 1].pos = fdf_transform(o->map.mesh.ref_v[i - 1].pos,
+			o->map.transform);
+// iso will determine projection
 	while (i < o->map.mesh.l_len)
 	{
 		l = (void*)&o->map.mesh.l[i * sizeof(l3d_t)];
