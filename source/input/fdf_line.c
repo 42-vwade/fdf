@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 15:56:41 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/20 02:56:07 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 16:34:44 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static	p3d_t
 }
 
 static void
-	array_create(t_list *lst, t_line *arr, size_t i)
+	array_create(t_list *lst, t_line *arr)
 {
 	t_list	*node;
 
@@ -94,10 +94,10 @@ void
 	list = NULL;
 	while (i < size)
 	{
-		ln[0] = (t_line){&m->mesh.v[i], (i + 1 < size) ?
-			v_h(&m->mesh.v[i + 1], m->mesh.v[i].pos, size - i) : NULL};
-		ln[1] = (t_line){&m->mesh.v[i], (i + m->size.x < size) ? v_v(&m->mesh.v[
-			i + m->size.x], m->mesh.v[i].pos, size - i - m->size.x) : NULL};
+		ln[0] = (t_line){&m->mesh.v[i], i + 1 < size ? v_h(&m->mesh.v[i + 1],
+			m->mesh.v[i].pos, size - i) : 0};
+		ln[1] = (t_line){&m->mesh.v[i], i + m->size.x < size ?
+v_v(&m->mesh.v[i + m->size.x], m->mesh.v[i].pos, size - i - m->size.x) : 0};
 		if (ln[0].b)
 			ft_lstpush(&list, ft_lstnew(&ln[0], sizeof(t_line)));
 		if (ln[1].b)
@@ -107,7 +107,7 @@ void
 	m->mesh.l_len = ft_lstlen(list);
 	fdf_create_line_array(
 		(void*)&m->mesh.l, sizeof(*m->mesh.l) * m->mesh.l_len);
-	array_create(list, (void*)m->mesh.l, 0);
+	array_create(list, (void*)m->mesh.l);
 	vertex_normalize(*m, m->mesh.v, m->mesh.v_len);
 	fdf_create_vertex_array((void *)&m->mesh.ref_v, m->mesh.v_len);
 	ft_memcpy((void *)m->mesh.ref_v, m->mesh.v, m->mesh.v_len * sizeof(p3d_t));

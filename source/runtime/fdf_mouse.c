@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 17:33:10 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/20 15:50:13 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 16:31:02 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int
 	mouse_up(int button, int x, int y, fdf_t *o)
 {
 	o->redraw = 1;
+	o->mouse_xy = (v2d_t){x, y};
 	return (!(o->mouse[button] = 0));
 }
 

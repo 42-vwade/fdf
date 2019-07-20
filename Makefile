@@ -4,17 +4,17 @@ SRCDIR		=	source/
 BUILDDIR	= 	build/
 OBJDIR		=	obj/
 LIBFTDIR	=	libft
-MLXLIBDIR	=	minilibx
+MLXLIBDIR	=
 FDFLIB		=	libfdf.a
-LIBFT		=	$(LIBFTDIR)/libft.a
-MLXLIB		=	$(MLXLIBDIR)/libmlx.a
+LIBFT		=	libft/libft.a
+MLXLIB		=	minilibx/libmlx.a
 CFILES		=	$(shell find ./source ! -name "._*" -regex ".*\\.[c]")
 LCFILES		=	$(shell find ./libft ! -name "._*" -regex ".*\\.[c]")
 
 SRC	= $(addprefix $(SRCDIR), $(notdir $(filter %.c, $(filter-out ._%, $(wildcard $(SRCDIR)*)))))
 OBJ	= $(notdir $(SRC:%.c=%.o))
 
-CFLAGS	= -Wall -Werror -Wextra
+CFLAGS	= -O2 -Wall -Werror -Wextra
 FF		= -framework OpenGL -framework AppKit
 
 ####	AUTO SETTING	########################################################
@@ -27,19 +27,9 @@ FDFLIB		:=	$(addprefix $(BUILDDIR), $(FDFLIB))
 ####	UNDER THE HOOD	########################################################
 
 all: $(NAME)
-	$^
-
-test: $(LIBFT) $(MLXLIB) $(FDFLIB)
-
 
 build: $(CFILES) $(LCFILES) $(MLXLIB)
-	@gcc -g -o $(NAME) $(FF) $^ -L $(LIBFTDIR) -L $(MLXLIBDIR) -lmlx
-
-test:
-	./$(NAME)
-
-run:
-	./$(NAME)
+	@gcc -g -o $(NAME) $(FF) $^ -L $(dir $(LIBFT)) -L $(dir $(MLXLIB)) -lmlx
 
 $(NAME): $(LIBFT) $(MLXLIB) $(FDFLIB)
 	@gcc -o $@ $(CFLAGS) $(FF) $^ -L $(dir $(LIBFT)) -L $(dir $(MLXLIB)) -lmlx -lft
@@ -53,10 +43,10 @@ $(OBJECTS): $(CFILES) | $(OBJDIR)
 	@make -C $(SRCDIR)
 	@mv ./*.o $(OBJDIR)
 
-$(MLXLIB): $(MLXLIBDIR)
+$(MLXLIB): $(dir $(MLXLIB))
 	@cd $^ && make all
 
-$(LIBFT): $(LIBFTDIR) | $(OBJDIR)
+$(LIBFT): $(dir $(LIBFT)) | $(OBJDIR)
 	@make all -C $(@D)
 
 $(OBJDIR):
@@ -67,13 +57,13 @@ $(BUILDDIR):
 
 clean:
 	@rm -rf $(OBJ)
-	@cd $(LIBFTDIR) && make clean
-	@cd $(MLXLIBDIR) && make clean
+	@cd $(dir $(LIBFT)) && make clean
+	@cd $(dir $(MLXLIB)) && make clean
 
 fclean: clean
 	@rm -rf $(NAME) $(FDFLIB)
-	@cd $(LIBFTDIR) && make fclean
-	@cd $(MLXLIBDIR) && make clean
+	@cd $(dir $(LIBFT)) && make fclean
+	@cd $(dir $(MLXLIB)) && make clean
 
 re: fclean all
 
