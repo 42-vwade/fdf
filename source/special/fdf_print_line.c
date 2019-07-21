@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 04:40:35 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/20 08:05:48 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/20 18:08:32 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void
 	l3d_t	*l;
 
 	i = 0;
-	while (i <= 400 && i < m.l_len)
+	while ((i <= 100 && i < m.l_len) || !write(1, "...\n", 4))
 	{
 		l = (void*)&m.l[i * sizeof(l3d_t)];
 		ft_putstr("line[");
