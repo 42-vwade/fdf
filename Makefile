@@ -35,7 +35,7 @@ $(NAME): $(LIBFT) $(MLXLIB) $(FDFLIB)
 	@gcc -o $(NAME) $(CFLAGS) $(FF) $^ -L $(dir $(LIBFT)) -L $(dir $(MLXLIB)) -lmlx -lft
 
 $(FDFLIB): $(OBJECTS) | $(OBJDIR) $(BUILDDIR)
-	@ar rcu $@ $(OBJDIR)/*.o
+	@ar rcu $@ $(OBJDIR)*.o
 	@ranlib $@
 
 $(OBJECTS): $(CFILES) | $(OBJDIR)
