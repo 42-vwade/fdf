@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 18:28:21 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/21 14:46:12 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/21 15:01:02 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,16 @@
 #define K_MV1(k,t,r)	IF_E(r=k==KEY_ARROW_DOWN,K_MVD(t),K_MV2(k,t,r))
 #define K_MV0(k,t,r)	IF_E(r=k==KEY_ARROW_LEFT,K_MVL(t),K_MV1(k,t,r))
 #define K_MOV(k,t,r)	IF_E(r=k==KEY_ARROW_RIGHT,K_MVR(t),K_MV0(k,t,r))
-#define K_SC0(k,s,r)	IF_C(r=k==KEY_NUM_MINUS,K_SCLZ(s,(1/1.125)))
-#define K_SCL(k,s,r)	IF_E(r=k==KEY_NUM_PLUS,K_SCLZ(s,(1.125)),K_SC0(k,s,r))
+#define K_SC1(k,s,r)	IF_C(r=k==KEY_NUM_MINUS,K_SCLZ(s,(1/1.125)))
+#define K_SC0(k,s,r)	IF_E(r=k==KEY_NUM_PLUS,K_SCLZ(s,(1.125)),K_SC0(k,s,r))
+#define K_SCL(k,s,r)	IF_E(r=k==KEY_0,s.z=S_ZERO,K_SC0(k,s,r))
 
 int
 	fdf_run_loop(fdf_t *o)
 {
 	if (o->key == 123 || o->key == 124 || o->key == 125 || o->key == 126)
 		K_MOV(o->key, o->map.transform.translate, o->redraw);
-	if (o->key == 78 || o->key == 69)
+	if (o->key == 29 || o->key == 78 || o->key == 69)
 		K_SCL(o->key, o->map.transform.scale, o->redraw);
 	if (o->redraw)
 	{

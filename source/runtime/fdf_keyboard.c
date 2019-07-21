@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 16:42:26 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/21 14:50:32 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/21 15:02:26 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int
 	IF_C(key == KEY_P, o->iso = o->iso ? 0 : 1);
 	IF_C(o->mode += key == KEY_C, fdf_color_mode(o));
 	IF_C(key == KEY_R, fdf_reset(o));
-	IF_C(o->redraw = key == KEY_0, o->map.transform.scale.z = 0.0001220703125L);
 	return (o->key = key);
 }
 
