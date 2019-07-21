@@ -26,7 +26,7 @@ FDFLIB		:=	$(addprefix $(BUILDDIR), $(FDFLIB))
 
 ####	UNDER THE HOOD	########################################################
 
-all: $(NAME)
+all: submodule $(NAME)
 
 build: $(CFILES) $(LCFILES) $(MLXLIB)
 	@gcc -g -o $(NAME) $(FF) $^ -L $(dir $(LIBFT)) -L $(dir $(MLXLIB)) -lmlx
@@ -53,6 +53,9 @@ $(OBJDIR):
 
 $(BUILDDIR):
 	@mkdir -p $@
+
+submodule:
+	@git submodule update --init --recursive
 
 clean:
 	@rm -rf $(OBJ)
