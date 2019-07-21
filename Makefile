@@ -37,7 +37,6 @@ $(NAME): $(LIBFT) $(MLXLIB) $(FDFLIB)
 $(FDFLIB): $(OBJECTS) | $(OBJDIR) $(BUILDDIR)
 	@ar rcu $@ $(OBJDIR)/*.o
 	@ranlib $@
-	@mv $@ $(BUILDDIR)
 
 $(OBJECTS): $(CFILES) | $(OBJDIR)
 	@make -C $(SRCDIR)
@@ -57,13 +56,14 @@ $(BUILDDIR):
 
 clean:
 	@rm -rf $(OBJ)
-	@cd $(dir $(LIBFT)) && make clean
-	@cd $(dir $(MLXLIB)) && make clean
+	@make clean -C $(dir $(LIBFT))
+	@make clean -C $(dir $(MLXLIB))
 
 fclean: clean
-	@rm -rf $(NAME) $(FDFLIB)
-	@cd $(dir $(LIBFT)) && make fclean
-	@cd $(dir $(MLXLIB)) && make clean
+	@make fclean -C $(dir $(LIBFT))
+	@rm -rf $(BUILDDIR)
+	@rm -rf $(NAME)
+
 
 re: fclean all
 
