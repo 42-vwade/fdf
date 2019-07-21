@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:43:22 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/20 11:49:00 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/21 15:13:25 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void
 	o.map = fdf_init(filename);
 	o.m_title = "fdf <-> viwade";
 	o.dim = fdf_window_size(o.map.size);
+	o.dim = (v2d_t){1200, 1200};
 	o.m_window = mlx_new_window(o.m_init, o.dim.x, o.dim.y, o.m_title);
 	o.resolution = MAX(1, o.dim.x / MAX(o.map.size.x, o.map.size.y));
 	o.resolution = MAX(42, (o.dim.x / 2) - WINDOW_PADDING);

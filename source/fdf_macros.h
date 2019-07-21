@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 10:39:33 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/21 14:59:24 by viwade           ###   ########.fr       */
+/*   Updated: 2019/07/21 15:18:29 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 **	SETTINGS
 */
 
-# define S_ZERO	(*(ld_t*)&(int){0x400})
+# define S_Z0	(0.0001220703125L)
 
 # define BIT_DEPTH 8
 # define LINE_RESOLUTION	42
