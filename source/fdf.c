@@ -28,6 +28,7 @@ void
 {
 	fdf_t	o;
 
+	ft_bzero(&o, sizeof(o));
 	o.m_init = mlx_init();
 	o.map = fdf_init(filename);
 	o.m_title = "fdf <-> viwade";

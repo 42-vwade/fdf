@@ -19,9 +19,10 @@
 
 # define VBLUE	0x00c0FF
 # define VDAWN	0xFF6000
+# define VGRSS	0xc0f060
 # define VWHTE	0xFFFFFF
 # define VGREY	0x808080
-# define VZERO	0xc0f060
+# define VZERO	VWHTE
 
 /*
 **	SETTINGS
